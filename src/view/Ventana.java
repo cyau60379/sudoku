@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import model.Juego;
+
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -51,6 +54,8 @@ public class Ventana extends JFrame implements Observer {
 	 */
 	public Ventana() {
 		initialize();
+		Juego.getJuego().addObserver(this);
+		update(null, null);
 	}
 
 	private void initialize() {
@@ -185,8 +190,12 @@ public class Ventana extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+		Map<Integer, Integer> mapValores = Juego.getJuego().getPartida();
+		listaCasillas.stream().forEach(p -> p.setValue(mapValores.get(p.getId())));
+		
 
+		Map<Integer, Boolean> mapDefaultValores = Juego.getJuego().getDefaultValues();
+		listaCasillas.stream().forEach(p -> p.setDefaultValue(mapDefaultValores.get(p.getId())));
 	}
 
 	// Controller

@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
 
 public class CasillaG extends JButton {
@@ -15,13 +17,20 @@ public class CasillaG extends JButton {
 		super(name);
 		id = pId;
 	}
+	
+	public int getId() {
+		return id;
+	}
 
 	public void setValue(int pValue) {
-		// TODO: implement
+		setText(Integer.toString(pValue));
 	}
 	
 	public void setDefaultValue(boolean pDefaultValue) {
 		defaultValue = pDefaultValue;
+		if (defaultValue) {
+			setForeground(Color.MAGENTA);
+		}
 	}
 	
 	public void select() {

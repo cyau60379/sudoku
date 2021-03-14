@@ -1,14 +1,13 @@
 package model;
 
 import java.util.List;
+import java.util.Map;
 
 public class Partida {
 
 	private String id;
 	private Nivel nivel;
 	private String nombreJugador;
-	private Cuadricula cuadricula;
-	private Solucion solucion;
 
 	/**
 	 * 
@@ -18,9 +17,14 @@ public class Partida {
 	 * @param pCuadricula
 	 * @param pSolucion
 	 */
-	public Partida(String pId, Nivel pNivel, int pNombreJugador, Cuadricula pCuadricula, Solucion pSolucion) {
-		// TODO - implement Partida.Partida
-		throw new UnsupportedOperationException();
+	public Partida(String pId, Nivel pNivel, String pNombreJugador, String pSudoku) {
+		id = pId;
+		nivel = pNivel;
+		nombreJugador = pNombreJugador;
+		String cuad = pSudoku.substring(0, pSudoku.length() / 2);
+		String sol = pSudoku.substring(pSudoku.length() / 2);
+		Cuadricula.getCuadricula().init(cuad);
+		Solucion.getSolucion().init(sol);
 	}
 
 	/**
@@ -46,6 +50,14 @@ public class Partida {
 	public void comprobarSolucion() {
 		// TODO - implement Partida.comprobarSolucion
 		throw new UnsupportedOperationException();
+	}
+
+	public Map<Integer, Integer> getValores() {
+		return Cuadricula.getCuadricula().getValores();
+	}
+
+	public Map<Integer, Boolean> getDefaultValues() {
+		return Cuadricula.getCuadricula().getDefaultValues();
 	}
 
 }

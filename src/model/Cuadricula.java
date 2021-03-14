@@ -1,6 +1,9 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Cuadricula {
 
@@ -16,9 +19,18 @@ public class Cuadricula {
 		return mCuadricula;
 	}
 
-	private void init() {
-		// TODO - implement Cuadricula.init
-		throw new UnsupportedOperationException();
+	public void init(String pSudoku) {
+		listaCasillas = new ArrayList<>();
+		String[] casillas = pSudoku.split("");
+		int region;
+		int linea;
+		int columna;
+		for (int i = 0; i < casillas.length; i++) {
+			linea = i / 9;
+			columna = i % 9;
+			region = 3 * (linea / 3) + (columna / 3);
+			listaCasillas.add(new Casilla(i, Integer.parseInt(casillas[i]), region, linea, columna));
+		}
 	}
 
 	/**
@@ -39,6 +51,14 @@ public class Cuadricula {
 	public boolean updateCandidatos(int pCasilla, List<Integer> pCandidatos) {
 		// TODO - implement Cuadricula.updateCandidatos
 		throw new UnsupportedOperationException();
+	}
+	
+	public Map<Integer, Integer> getValores() {
+		return listaCasillas.stream().collect(Collectors.toMap(Casilla::getId, Casilla::getValor));
+	}
+
+	public Map<Integer, Boolean> getDefaultValues() {
+		return listaCasillas.stream().collect(Collectors.toMap(Casilla::getId, Casilla::getDefaultValue));
 	}
 
 }

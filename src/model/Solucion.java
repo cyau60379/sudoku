@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Solucion {
@@ -16,9 +17,18 @@ public class Solucion {
 		return mSolucion;
 	}
 
-	private void init() {
-		// TODO - implement Solucion.init
-		throw new UnsupportedOperationException();
+	public void init(String pSudoku) {
+		listaCasillas = new ArrayList<>();
+		String[] casillas = pSudoku.split("");
+		int region;
+		int linea;
+		int columna;
+		for (int i = 0; i < casillas.length; i++) {
+			linea = i / 9;
+			columna = i % 9;
+			region = 3 * (linea / 3) + (columna / 3);
+			listaCasillas.add(new Casilla(i, Integer.parseInt(casillas[i]), region, linea, columna));
+		}
 	}
 
 }
