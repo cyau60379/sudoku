@@ -22,6 +22,9 @@ public class Casilla {
 	 * @param pColumna
 	 */
 	public Casilla(int pId, int pValor, int pRegion, int pLinea, int pColumna) {
+		if (pId < 0 || pId > 80 || pValor < 0 || pValor > 9 || pRegion < 0 || pRegion > 8 || pLinea < 0 || pLinea > 8 || pColumna < 0 || pColumna > 8) {
+			throw new IllegalArgumentException();
+		}
 		id = pId;
 		valor = pValor;
 		region = pRegion;

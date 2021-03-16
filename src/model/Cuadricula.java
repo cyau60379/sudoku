@@ -21,15 +21,20 @@ public class Cuadricula {
 
 	public void init(String pSudoku) {
 		listaCasillas = new ArrayList<>();
-		String[] casillas = pSudoku.split("");
-		int region;
-		int linea;
-		int columna;
-		for (int i = 0; i < casillas.length; i++) {
-			linea = i / 9;
-			columna = i % 9;
-			region = 3 * (linea / 3) + (columna / 3);
-			listaCasillas.add(new Casilla(i, Integer.parseInt(casillas[i]), region, linea, columna));
+		try {
+			String[] casillas = pSudoku.split("");
+			int region;
+			int linea;
+			int columna;
+			for (int i = 0; i < casillas.length; i++) {
+				linea = i / 9;
+				columna = i % 9;
+				region = 3 * (linea / 3) + (columna / 3);
+				listaCasillas.add(new Casilla(i, Integer.parseInt(casillas[i]), region, linea, columna));
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println("The sudoku contains characters. Stop the construction");
 		}
 	}
 
@@ -52,7 +57,7 @@ public class Cuadricula {
 		// TODO - implement Cuadricula.updateCandidatos
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public Map<Integer, Integer> getValores() {
 		return listaCasillas.stream().collect(Collectors.toMap(Casilla::getId, Casilla::getValor));
 	}
