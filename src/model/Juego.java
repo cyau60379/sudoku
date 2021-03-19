@@ -61,5 +61,5 @@ public class Juego extends Observable {
 	public Map<Integer, Boolean> getTieneError() {
 		return Cuadricula.getCuadricula().getTieneError();
 	}
-	
+
 }

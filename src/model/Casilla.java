@@ -24,7 +24,8 @@ public class Casilla {
 	 * @param pColumna
 	 */
 	public Casilla(int pId, int pValor, int pRegion, int pLinea, int pColumna) {
-		if (pId < 0 || pId > 80 || pValor < 0 || pValor > 9 || pRegion < 0 || pRegion > 8 || pLinea < 0 || pLinea > 8 || pColumna < 0 || pColumna > 8) {
+		if (pId < 0 || pId > 80 || pValor < 0 || pValor > 9 || pRegion < 0 || pRegion > 8 || pLinea < 0 || pLinea > 8
+				|| pColumna < 0 || pColumna > 8) {
 			throw new IllegalArgumentException();
 		}
 		id = pId;
@@ -32,15 +33,15 @@ public class Casilla {
 		region = pRegion;
 		linea = pLinea;
 		columna = pColumna;
-		tieneError=false;
-		esProcesado=false;
+		tieneError = false;
+		esProcesado = false;
 		candidatos = new ArrayList<>();
 		if (pValor != 0) {
 			defaultValue = true;
 		} else {
 			defaultValue = false;
 		}
-		
+
 	}
 
 	/**
@@ -53,29 +54,33 @@ public class Casilla {
 		}
 		this.valor = pValor;
 	}
+
 	public boolean esRepetido(int pValor, int pid) {
-		if(esProcesado==false) {
-			if(valor==pValor && id!=pid) {
-				esProcesado=true;
-				tieneError=true;
+		if (esProcesado == false) {
+			if (valor == pValor && id != pid) {
+				esProcesado = true;
+				tieneError = true;
 				return true;
 			}
-			esProcesado=false;
-			tieneError=false;
+			esProcesado = false;
+			tieneError = false;
 			return false;
 		}
-		return false;
+		return true;
 	}
-	
+
 	public boolean getTieneError() {
 		return tieneError;
 	}
+
 	public void setTieneError(boolean ptieneError) {
-		tieneError=ptieneError;
+		tieneError = ptieneError;
 	}
-	public void setEsProcesado(boolean X) {
-		esProcesado=X;
+
+	public void setEsProcesado(boolean pEsProcesado) {
+		esProcesado = pEsProcesado;
 	}
+
 	/**
 	 * 
 	 * @param pCandidatos
@@ -95,15 +100,18 @@ public class Casilla {
 	public boolean getDefaultValue() {
 		return defaultValue;
 	}
+
 	public int getLinea() {
 		return linea;
 	}
+
 	public int getColumna() {
 		return columna;
 	}
+
 	public int getRegion() {
 		return region;
-		
+
 	}
-	
+
 }
