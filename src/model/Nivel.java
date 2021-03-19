@@ -14,5 +14,14 @@ public enum Nivel {
 	public int getValor() {
 		return this.valor;
 	}
+	
+    public static Nivel fromInt(int pIntNivel) {
+        for (Nivel niv : Nivel.values()) {
+            if (niv.valor == pIntNivel) {
+                return niv;
+            }
+        }
+        return null;
+    }
 
 }

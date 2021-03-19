@@ -1,29 +1,30 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import model.Cuadricula;
 
 class CuadriculaTests {
-
-	private final PrintStream standardOut = System.out;
-	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-	@BeforeEach
-	public void setUp() {
-	    System.setOut(new PrintStream(outputStreamCaptor));
-	}
 	
 	@Test
 	void wrongSudokuFile() {
-		Cuadricula.getCuadricula().init("Hello");
-	    assertEquals("The sudoku contains characters. Stop the construction", outputStreamCaptor.toString().trim());
-	}
+		try {
+			List<Integer> myNumbers = new ArrayList<>();
+		    myNumbers.add(33);
+		    myNumbers.add(15);
+		    myNumbers.add(20);
+		    myNumbers.add(34);
+		    myNumbers.add(8);
+		    myNumbers.add(12);
+			Cuadricula.getCuadricula().init("", myNumbers);
+			fail("Must have 81 values");
+		} catch (IllegalArgumentException e) {
 
+		}
+	}
 }
