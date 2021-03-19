@@ -83,6 +83,31 @@ public class Cuadricula {
 		listaCasillas.stream().forEach(p -> comprobarValorCasilla(p));
 	}
 
+	public String getMensaje() {
+		List<Casilla> errors = listaCasillas.stream().filter(p -> p.getTieneError() && p.getValor() != 0).collect(Collectors.toList());
+		int numErrors = errors.size();
+		List<Integer> columnas = errors.stream().map(Casilla::getColumna).distinct().collect(Collectors.toList());
+		List<Integer> lineas = errors.stream().map(Casilla::getLinea).distinct().collect(Collectors.toList());
+		List<Integer> regiones = errors.stream().map(Casilla::getRegion).distinct().collect(Collectors.toList());
+		String mensaje = "Numero de errores: " + Integer.toString(numErrors) + "\n";
+		String menCol = "columnas: ";
+		for (Integer i : columnas) {
+			menCol += Integer.toString(i) + " ";
+		}
+		menCol += "\n";
+		String menLin = "lineas: ";
+		for (Integer i : lineas) {
+			menLin += Integer.toString(i) + " ";
+		}
+		menLin += "\n";
+		String menReg = "regiones: ";
+		for (Integer i : regiones) {
+			menReg += Integer.toString(i) + " ";
+		}
+		menReg += "\n";
+		return mensaje + menCol + menLin + menReg;
+	}
+	
 	/**
 	 * 
 	 * @param pCasilla
