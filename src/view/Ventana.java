@@ -169,6 +169,7 @@ public class Ventana extends JFrame implements Observer {
 		if (info == null) {
 			info = new JTextPane();
 			info.setEditable(false);
+		
 		}
 		return info;
 	}
@@ -183,6 +184,7 @@ public class Ventana extends JFrame implements Observer {
 		}
 		return cuadricula;
 	}
+	
 
 	private JButton getBtnCasilla(int index, int value) {
 		if (listaCasillas.size() <= index || listaCasillas.get(index) == null) {
@@ -201,12 +203,18 @@ public class Ventana extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		Map<Integer, Boolean> valorError = Juego.getJuego().getTieneError();
+		listaCasillas.stream().forEach(p -> p.tieneError(valorError.get(p.getId())));
+		
 		Map<Integer, Integer> mapValores = Juego.getJuego().getPartida();
 		listaCasillas.stream().forEach(p -> p.setValue(mapValores.get(p.getId())));
 		
 
 		Map<Integer, Boolean> mapDefaultValores = Juego.getJuego().getDefaultValues();
 		listaCasillas.stream().forEach(p -> p.setDefaultValue(mapDefaultValores.get(p.getId())));
+		
+
+		
 	}
 
 	// Controller

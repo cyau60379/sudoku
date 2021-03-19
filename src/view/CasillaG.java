@@ -30,12 +30,21 @@ public class CasillaG extends JButton {
 		}
 	}
 	
+	
 	public void setDefaultValue(boolean pDefaultValue) {
 		defaultValue = pDefaultValue;
 		if (defaultValue) {
 			setContentAreaFilled(false);
 			setForeground(Color.MAGENTA);
 			setRolloverEnabled(false);
+		}
+	}
+	public void tieneError(boolean ptieneError) {
+		if (ptieneError==true) {
+			setForeground(Color.RED);
+		}
+		else {
+			setForeground(Color.GREEN);
 		}
 	}
 	

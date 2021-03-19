@@ -12,6 +12,8 @@ public class Casilla {
 	private int columna;
 	private List<Integer> candidatos;
 	private boolean defaultValue;
+	private boolean tieneError;
+	private boolean esProcesado;
 
 	/**
 	 * 
@@ -30,12 +32,15 @@ public class Casilla {
 		region = pRegion;
 		linea = pLinea;
 		columna = pColumna;
+		tieneError=false;
+		esProcesado=false;
 		candidatos = new ArrayList<>();
 		if (pValor != 0) {
 			defaultValue = true;
 		} else {
 			defaultValue = false;
 		}
+		
 	}
 
 	/**
@@ -48,7 +53,29 @@ public class Casilla {
 		}
 		this.valor = pValor;
 	}
-
+	public boolean esRepetido(int pValor, int pid) {
+		if(esProcesado==false) {
+			if(valor==pValor && id!=pid) {
+				esProcesado=true;
+				tieneError=true;
+				return true;
+			}
+			esProcesado=false;
+			tieneError=false;
+			return false;
+		}
+		return false;
+	}
+	
+	public boolean getTieneError() {
+		return tieneError;
+	}
+	public void setTieneError(boolean ptieneError) {
+		tieneError=ptieneError;
+	}
+	public void setEsProcesado(boolean X) {
+		esProcesado=X;
+	}
 	/**
 	 * 
 	 * @param pCandidatos
@@ -67,6 +94,16 @@ public class Casilla {
 
 	public boolean getDefaultValue() {
 		return defaultValue;
+	}
+	public int getLinea() {
+		return linea;
+	}
+	public int getColumna() {
+		return columna;
+	}
+	public int getRegion() {
+		return region;
+		
 	}
 	
 }

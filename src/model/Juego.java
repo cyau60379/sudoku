@@ -57,5 +57,9 @@ public class Juego extends Observable {
 	public Map<Integer, Boolean> getDefaultValues() {
 		return Cuadricula.getCuadricula().getDefaultValues();
 	}
+
+	public Map<Integer, Boolean> getTieneError() {
+		return Cuadricula.getCuadricula().getTieneError();
+	}
 	
 }
