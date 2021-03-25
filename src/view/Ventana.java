@@ -213,6 +213,8 @@ public class Ventana extends JFrame implements Observer {
 		Map<Integer, Boolean> mapDefaultValores = Juego.getJuego().getDefaultValues();
 		listaCasillas.stream().forEach(p -> p.setDefaultValue(mapDefaultValores.get(p.getId())));
 		
+		String mensaje = Juego.getJuego().getMensaje();
+		getInfo().setText(mensaje);
 	}
 
 	// Controller
