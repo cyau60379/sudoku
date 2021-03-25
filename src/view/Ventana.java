@@ -43,6 +43,7 @@ public class Ventana extends JFrame implements Observer {
 	private JButton btnModificar;
 	private JButton btnRestablecer;
 	private JButton btnAyuda;
+	private JButton btnComprobar;
 	private JTextPane info;
 	// Grid elements
 	private JPanel cuadricula;
@@ -74,38 +75,56 @@ public class Ventana extends JFrame implements Observer {
 		if (editor == null) {
 			editor = new JPanel();
 			GroupLayout gl_panel = new GroupLayout(editor);
-			gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel.createSequentialGroup().addGap(7)
-							.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE).addContainerGap())
-					.addGroup(Alignment.TRAILING,
-							gl_panel.createSequentialGroup().addContainerGap(93, Short.MAX_VALUE)
-									.addComponent(getBtnAyuda()).addGap(84))
-					.addGroup(gl_panel.createSequentialGroup().addContainerGap()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addComponent(getLblCandidatos())
-									.addComponent(getLblValor()))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(getBtnModificar())
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-											.addGroup(gl_panel.createSequentialGroup()
-													.addComponent(getValor(), GroupLayout.PREFERRED_SIZE,
-															GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-													.addPreferredGap(ComponentPlacement.RELATED)
-													.addComponent(getBtnRestablecer()))
-											.addComponent(getTextField())))
-							.addGap(19)));
-			gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel.createSequentialGroup().addGap(5)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(getLblCandidatos())
-									.addComponent(getTextField(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-											GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(getLblValor())
-									.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-											GroupLayout.PREFERRED_SIZE)
+			gl_panel.setHorizontalGroup(
+				gl_panel.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel.createSequentialGroup()
+						.addGap(7)
+						.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+						.addContainerGap())
+					.addGroup(gl_panel.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+							.addComponent(getLblCandidatos())
+							.addComponent(getLblValor()))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+							.addComponent(getBtnModificar())
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(getBtnRestablecer()))
-							.addGap(18).addComponent(getBtnModificar()).addGap(18).addComponent(getBtnAyuda())
-							.addGap(18).addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-							.addContainerGap()));
+								.addComponent(getTextField())))
+						.addGap(19))
+					.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+						.addGap(35)
+						.addComponent(getBtnAyuda())
+						.addGap(18)
+						.addComponent(getBtnComprobar())
+						.addContainerGap(27, Short.MAX_VALUE))
+			);
+			gl_panel.setVerticalGroup(
+				gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createSequentialGroup()
+						.addGap(5)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getLblCandidatos())
+							.addComponent(getTextField(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getLblValor())
+							.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(getBtnRestablecer()))
+						.addGap(18)
+						.addComponent(getBtnModificar())
+						.addGap(18)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getBtnAyuda())
+							.addComponent(getBtnComprobar()))
+						.addGap(18)
+						.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+						.addContainerGap())
+			);
 			editor.setLayout(gl_panel);
 		}
 		return editor;
@@ -165,6 +184,14 @@ public class Ventana extends JFrame implements Observer {
 		return btnAyuda;
 	}
 
+	private JButton getBtnComprobar() {
+		if (btnComprobar == null) {
+			btnComprobar = new JButton("Comprobar");
+			btnComprobar.addActionListener(getControlador());
+		}
+		return btnComprobar;
+	}
+	
 	private JTextPane getInfo() {
 		if (info == null) {
 			info = new JTextPane();
@@ -241,9 +268,13 @@ public class Ventana extends JFrame implements Observer {
 			} else {
 				JButton b = (JButton) e.getSource();
 				if (b.getText() == "Modificar") {
-					Juego.getJuego().updateCasilla(currentCasilla.getId(), Integer.parseInt(valor.getValue().toString()));
+					try {
+						Juego.getJuego().updateCasilla(currentCasilla.getId(), Integer.parseInt(valor.getValue().toString()));
+					} catch (NullPointerException e2) {}
 				} else if (b.getText() == "Restablecer") {
-					Juego.getJuego().updateCasilla(currentCasilla.getId(), 0);
+					try {
+						Juego.getJuego().updateCasilla(currentCasilla.getId(), 0);
+					} catch (NullPointerException e2) {}
 				}
 			}
 		}
