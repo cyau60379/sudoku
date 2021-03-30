@@ -63,15 +63,12 @@ public class Cuadricula {
 		procesar(columnas);
 		procesar(lineas);
 		procesar(regiones);
-		reinicio(columnas);
-		reinicio(lineas);
-		reinicio(regiones);
 	}
 
 	public void procesar(List<Casilla> pLista) {
 		for (int i = 0; i < pLista.size(); i++) {
 			Casilla c = pLista.get(i);
-			pLista.stream().filter(p -> p.esRepetido(c.getValor(), c.getId())).collect(Collectors.toList());
+			pLista.stream().forEach(p -> p.esRepetido(c.getValor(), c.getId()));
 		}
 	}
 
@@ -81,6 +78,7 @@ public class Cuadricula {
 
 	public void comprobarSolucion() {
 		listaCasillas.stream().forEach(p -> comprobarValorCasilla(p));
+		reinicio(listaCasillas);
 	}
 
 	public String getMensaje() {
