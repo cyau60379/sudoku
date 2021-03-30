@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -66,4 +67,12 @@ public class Juego extends Observable {
 		return Cuadricula.getCuadricula().getMensaje();
 	}
 
+	public List<Integer> getNiveles() {
+		List<Integer> niveles = new ArrayList<>();
+		for (Nivel s : Nivel.values()) {
+			niveles.add(s.getValor());
+		}
+		return niveles;
+	}
+	
 }

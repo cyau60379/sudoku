@@ -36,27 +36,25 @@ public class ListaSudokus {
 			table = new BufferedReader(reader);
 			while (true) {
 				line = table.readLine();
-				if (line == null) {
-					break;
-				} else {
-					if (line.contains("S")) { // id
-						if (id != "" && dificulty != 0 && sudoku != "") {
-							List<Integer> startCuadricula = convertStringToList(
-									sudoku.substring(0, sudoku.length() / 2));
-							List<Integer> solucion = convertStringToList(sudoku.substring(sudoku.length() / 2));
-							listaSudokus.add(new Sudoku(id, Nivel.fromInt(dificulty), startCuadricula, solucion));
-							// initialize the next sudoku
-							id = line;
-							dificulty = 0;
-							sudoku = "";
-						} else {
-							id = line;
-						}
-					} else if (line.length() == 1) { // level
-						dificulty = Integer.parseInt(line);
-					} else { // matrix line
-						sudoku += line;
+				if (line == null || line.contains("S")) { // id
+					if (id != "" && dificulty != 0 && sudoku != "") {
+						List<Integer> startCuadricula = convertStringToList(sudoku.substring(0, sudoku.length() / 2));
+						List<Integer> solucion = convertStringToList(sudoku.substring(sudoku.length() / 2));
+						listaSudokus.add(new Sudoku(id, Nivel.fromInt(dificulty), startCuadricula, solucion));
+						// initialize the next sudoku
+						id = line;
+						dificulty = 0;
+						sudoku = "";
+					} else {
+						id = line;
 					}
+					if (line == null) {
+						break;
+					}
+				} else if (line.length() == 1) { // level
+					dificulty = Integer.parseInt(line);
+				} else { // matrix line
+					sudoku += line;
 				}
 			}
 		} catch (IOException e) {
