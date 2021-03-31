@@ -10,7 +10,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Juego juego = Juego.getJuego();
-		juego.init("src\\resources\\sudokus.txt");
+		juego.init("src/resources/sudokus.txt");
 		VentanaInicial ventana = new VentanaInicial();
 		ventana.setVisible(true);
 	}

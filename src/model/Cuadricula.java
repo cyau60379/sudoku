@@ -82,7 +82,7 @@ public class Cuadricula {
 	}
 
 	public String getMensaje() {
-		List<Casilla> errors = listaCasillas.stream().filter(p -> p.getTieneError() && p.getValor() != 0).collect(Collectors.toList());
+		List<Casilla> errors = listaCasillas.stream().filter(p -> p.getTieneError() && p.getValor() != 0 && p.getDefaultValue()==false).collect(Collectors.toList());
 		int numErrors = errors.size();
 		List<Integer> columnas = errors.stream().map(Casilla::getColumna).distinct().collect(Collectors.toList());
 		List<Integer> lineas = errors.stream().map(Casilla::getLinea).distinct().collect(Collectors.toList());
