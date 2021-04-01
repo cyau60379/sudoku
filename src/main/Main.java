@@ -1,6 +1,9 @@
 package main;
 
 import view.VentanaInicial;
+
+import java.nio.file.Paths;
+
 import model.Juego;
 
 public class Main {
@@ -10,7 +13,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Juego juego = Juego.getJuego();
-		juego.init("src/resources/sudokus.txt");
+		String path = Paths.get("src", "resources", "sudokus.txt").toString();
+		juego.init(path);
 		VentanaInicial ventana = new VentanaInicial();
 		ventana.setVisible(true);
 	}
