@@ -3,25 +3,28 @@ package model;
 import java.util.List;
 
 public class SudokuFactory {
-	private static SudokuFactory mSudokuFactory;
-	
-	private SudokuFactory() {}
-	
-	public SudokuFactory getSudokuFactory () {
+	private static SudokuFactory mSudokuFactory = new SudokuFactory();
+
+	private SudokuFactory() {
+	}
+
+	public static SudokuFactory getSudokuFactory() {
 		return mSudokuFactory;
 	}
-	
-	public Sudoku creatSudoku(String pId, int pDificultad, List<Integer> pStart, List<Integer> pSolucion) {
-		
-		if (pDificultad == 1) {
-			return new SudokuFacil(pId, pStart, pSolucion);
+
+	public Sudoku createSudoku(String pId, int pDificultad, List<Integer> pStart, List<Integer> pSolucion) {
+		Sudoku sudoku = null;
+		switch (pDificultad) {
+		case 1:
+			sudoku = new SudokuFacil(pId, pStart, pSolucion);
+			break;
+		case 2:
+			sudoku = new SudokuMedio(pId, pStart, pSolucion);
+			break;
+		case 3:
+			sudoku = new SudokuDificil(pId, pStart, pSolucion);
+			break;
 		}
-		else if (pDificultad == 2) {
-			return new SudokuMedio(pId, pStart, pSolucion);
-		}
-		else if (pDificultad == 3) {
-			return new SudokuDificil(pId, pStart, pSolucion);
-		}
-		return null;
+		return sudoku;
 	}
 }
