@@ -40,7 +40,8 @@ public class ListaSudokus {
 					if (id != "" && dificulty != 0 && sudoku != "") {
 						List<Integer> startCuadricula = convertStringToList(sudoku.substring(0, sudoku.length() / 2));
 						List<Integer> solucion = convertStringToList(sudoku.substring(sudoku.length() / 2));
-						listaSudokus.add(new Sudoku(id, Nivel.fromInt(dificulty), startCuadricula, solucion));
+						Sudoku newSudoku = SudokuFactory.getSudokuFactory().createSudoku(id, dificulty, startCuadricula, solucion);
+						listaSudokus.add(newSudoku);
 						// initialize the next sudoku
 						id = line;
 						dificulty = 0;
@@ -94,8 +95,8 @@ public class ListaSudokus {
 		return l;
 	}
 
-	public void begin(Nivel pNivel) {
-		List<Sudoku> sudokus = listaSudokus.stream().filter(p -> p.getNivel().equals(pNivel))
+	public void begin(int pNivel) {
+		List<Sudoku> sudokus = listaSudokus.stream().filter(p -> p.getNivel().getValor() == pNivel)
 				.collect(Collectors.toList());
 		Sudoku sudoku = sudokus.get(0); // TODO: change later if there is more that one with the same level
 		Cuadricula.getCuadricula().init(sudoku.getId(), sudoku.getStartCuadricula());

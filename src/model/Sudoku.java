@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class Sudoku {
+public abstract class Sudoku {
 
 	private String id;
 	private List<Integer> solucion;
@@ -22,15 +22,15 @@ public class Sudoku {
 		solucion = pSolucion;
 		startCuadricula = pStartCuadricula;
 	}
-	
+
 	public Nivel getNivel() {
 		return nivel;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
-	
+
 	public List<Integer> getStartCuadricula() {
 		return startCuadricula;
 	}

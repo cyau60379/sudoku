@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -11,8 +9,6 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import model.Juego;
 import model.Nivel;
@@ -151,7 +147,7 @@ public class VentanaInicial extends JFrame implements Observer {
 	private class Controlador implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			Juego.getJuego().begin(getTextNombre().getText(), Nivel.fromInt((int) getComboBox().getSelectedItem()));
+			Juego.getJuego().begin(getTextNombre().getText(), (int) getComboBox().getSelectedItem());
 			close(); //closes the window--cannot be recovered
 			Ventana ventana = new Ventana();
 			ventana.setVisible(true);

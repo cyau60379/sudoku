@@ -21,7 +21,7 @@ public class Juego extends Observable {
 		ListaSudokus.getListaSudokus().init(pFicheroJuego);
 	}
 
-	public void begin(String pNombre, Nivel pNivel) {
+	public void begin(String pNombre, int pNivel) {
 		ListaSudokus.getListaSudokus().begin(pNivel);
 	}
 
@@ -62,7 +62,7 @@ public class Juego extends Observable {
 	public Map<Integer, Boolean> getTieneError() {
 		return Cuadricula.getCuadricula().getTieneError();
 	}
-	
+
 	public String getMensaje() {
 		return Cuadricula.getCuadricula().getMensaje();
 	}
@@ -74,5 +74,5 @@ public class Juego extends Observable {
 		}
 		return niveles;
 	}
-	
+
 }
