@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
+import model.Sudoku.ListaSudokus;
+
 public class Juego extends Observable {
 
 	private static Juego mJuego = new Juego();

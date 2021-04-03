@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Casilla {
+import model.Estados.ICasillaEstado;
+
+public class Casilla implements ICasillaEstado{
 
 	private int id;
 	private int valor;
@@ -112,6 +114,12 @@ public class Casilla {
 	public int getRegion() {
 		return region;
 
+	}
+
+	@Override
+	public void setEstado() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

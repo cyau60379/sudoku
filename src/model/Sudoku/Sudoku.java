@@ -1,6 +1,8 @@
-package model;
+package model.Sudoku;
 
 import java.util.List;
+
+import model.Nivel;
 
 public abstract class Sudoku {
 
