@@ -17,7 +17,7 @@ public class CasillaG extends JButton {
 		super(name);
 		id = pId;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -28,37 +28,49 @@ public class CasillaG extends JButton {
 		} else {
 			setText(Integer.toString(pValue));
 		}
+		setBackground(getColor());
 	}
-	
-	
+
 	public void setDefaultValue(boolean pDefaultValue) {
 		defaultValue = pDefaultValue;
 		if (defaultValue) {
-			setContentAreaFilled(false);
-			setForeground(Color.MAGENTA);
+			setForeground(new Color(168, 168, 168));
 			setRolloverEnabled(false);
 		}
 	}
+
 	public void tieneError(boolean ptieneError) {
-		if (ptieneError==true) {
+		if (ptieneError == true) {
 			setForeground(Color.RED);
-		}
-		else {
-			setForeground(Color.GREEN);
+		} else {
+			setForeground(Color.BLACK);
 		}
 	}
-	
+
 	public boolean getDefaultValue() {
 		return defaultValue;
 	}
-	
+
 	public void select() {
 		setBackground(new Color(196, 224, 255));
 		setEnabled(false);
 	}
-	
+
 	public void unselect() {
-		setBackground(null);
+		setBackground(getColor());
 		setEnabled(true);
+	}
+
+	private Color getColor() {
+		int linea = id / 9;
+		int columna = id % 9;
+		int region = 3 * (linea / 3) + (columna / 3);
+		Color color;
+		if (region % 2 == 0) {
+			color = new Color(242, 230, 255);
+		} else {
+			color = new Color(213, 202, 224);
+		}
+		return color;
 	}
 }
