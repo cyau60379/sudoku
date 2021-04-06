@@ -114,4 +114,67 @@ class CasillaTests {
 
 		}
 	}
+
+	@Test
+	public void findRepetition() {
+		try {
+			Casilla casilla = new Casilla(1, 3, 0, 0, 0);
+			assertTrue(casilla.esRepetido(3, 80));
+		} catch (IllegalArgumentException e) {
+			fail("Wrong definition of Casilla: please verify your implementation");
+		}
+	}
+
+	@Test
+	public void doNotFindRepetitionWithDifferentValue() {
+		try {
+			Casilla casilla = new Casilla(1, 3, 0, 0, 0);
+			assertFalse(casilla.esRepetido(1, 80));
+		} catch (IllegalArgumentException e) {
+			fail("Wrong definition of Casilla: please verify your implementation");
+		}
+	}
+
+	@Test
+	public void doNotFindRepetitionWhenProcessingCurrent() {
+		try {
+			Casilla casilla = new Casilla(1, 3, 0, 0, 0);
+			assertFalse(casilla.esRepetido(3, 1));
+		} catch (IllegalArgumentException e) {
+			fail("Wrong definition of Casilla: please verify your implementation");
+		}
+	}
+
+	@Test
+	public void returnDirectlyTrueIfAlreadyProcessed() {
+		try {
+			Casilla casilla = new Casilla(1, 3, 0, 0, 0);
+			casilla.setEsProcesado(true); // TODO: change with setEstado() when implemented
+			assertTrue(casilla.esRepetido(3, 1));
+		} catch (IllegalArgumentException e) {
+			fail("Wrong definition of Casilla: please verify your implementation");
+		}
+	}
+
+	@Test
+	public void setValorWithNegativeValue() {
+		try {
+			Casilla casilla = new Casilla(1, 3, 0, 0, 0);
+			casilla.setValor(-1);
+			fail("Value must be positive");
+		} catch (IllegalArgumentException e) {
+
+		}
+	}
+
+	@Test
+	public void setValorWithOutOfBoundValue() {
+		try {
+			Casilla casilla = new Casilla(1, 3, 0, 0, 0);
+			casilla.setValor(10);
+			fail("Value must be between 0 (undefined) and 9");
+		} catch (IllegalArgumentException e) {
+
+		}
+	}
 }
