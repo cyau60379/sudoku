@@ -59,11 +59,13 @@ public class Casilla implements ICasillaEstado{
 
 	public boolean esRepetido(int pValor, int pid) {
 		if (esProcesado == false) {
-			if (valor == pValor && id != pid) {
+			if (valor == pValor && id != pid && pValor!= 0) {
 				esProcesado = true;
 				tieneError = true;
+				
 				return true;
 			}
+			
 			esProcesado = false;
 			tieneError = false;
 			return false;

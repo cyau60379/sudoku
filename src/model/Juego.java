@@ -48,10 +48,7 @@ public class Juego extends Observable {
 		throw new UnsupportedOperationException();
 	}
 
-	public void comprobarSolucion() {
-		// TODO - implement Juego.comprobarSolucion
-		throw new UnsupportedOperationException();
-	}
+
 
 	public Map<Integer, Integer> getPartida() {
 		return Cuadricula.getCuadricula().getValores();
@@ -67,6 +64,11 @@ public class Juego extends Observable {
 
 	public String getMensaje() {
 		return Cuadricula.getCuadricula().getMensaje();
+	}
+	public void comprobarSolucion() {
+		 Cuadricula.getCuadricula().comprobarSolucion();
+			setChanged();
+			notifyObservers();
 	}
 
 	public List<Integer> getNiveles() {

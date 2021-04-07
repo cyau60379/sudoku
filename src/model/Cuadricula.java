@@ -46,7 +46,6 @@ public class Cuadricula {
 		try {
 			Casilla c = listaCasillas.get(pCasilla);
 			c.setValor(pValor);
-			comprobarSolucion();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -127,5 +126,6 @@ public class Cuadricula {
 	public Map<Integer, Boolean> getTieneError() {
 		return listaCasillas.stream().collect(Collectors.toMap(Casilla::getId, Casilla::getTieneError));
 	}
+	
 
 }

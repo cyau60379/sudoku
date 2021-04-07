@@ -49,6 +49,7 @@ public class Ventana extends JFrame implements Observer {
 	private JPanel cuadricula;
 	private CasillaG currentCasilla;
 	private List<CasillaG> listaCasillas = new ArrayList<CasillaG>();
+	private boolean comprobar;
 
 	/**
 	 * Create the frame.
@@ -69,6 +70,7 @@ public class Ventana extends JFrame implements Observer {
 		setContentPane(contentPane);
 		contentPane.add(getEditor(), BorderLayout.EAST);
 		contentPane.add(getCuadricula(), BorderLayout.CENTER);
+		comprobar = false;
 	}
 
 	private JPanel getEditor() {
@@ -192,6 +194,9 @@ public class Ventana extends JFrame implements Observer {
 		return btnComprobar;
 	}
 	
+		
+	
+	
 	private JTextPane getInfo() {
 		if (info == null) {
 			info = new JTextPane();
@@ -230,8 +235,6 @@ public class Ventana extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		Map<Integer, Boolean> valorError = Juego.getJuego().getTieneError();
-		listaCasillas.stream().forEach(p -> p.tieneError(valorError.get(p.getId())));
 		
 		Map<Integer, Integer> mapValores = Juego.getJuego().getPartida();
 		listaCasillas.stream().forEach(p -> p.setValue(mapValores.get(p.getId())));
@@ -240,9 +243,11 @@ public class Ventana extends JFrame implements Observer {
 		Map<Integer, Boolean> mapDefaultValores = Juego.getJuego().getDefaultValues();
 		listaCasillas.stream().forEach(p -> p.setDefaultValue(mapDefaultValores.get(p.getId())));
 		
-		String mensaje = Juego.getJuego().getMensaje();
-		getInfo().setText(mensaje);
-	}
+		Map<Integer, Boolean> valorError = Juego.getJuego().getTieneError();
+		listaCasillas.stream().forEach(p -> p.tieneError(valorError.get(p.getId())));
+		
+
+		}
 
 	// Controller
 
@@ -250,6 +255,7 @@ public class Ventana extends JFrame implements Observer {
 		if (controlador == null) {
 			controlador = new Controlador();
 		}
+
 		return controlador;
 	}
 
@@ -274,6 +280,12 @@ public class Ventana extends JFrame implements Observer {
 				} else if (b.getText() == "Restablecer") {
 					try {
 						Juego.getJuego().updateCasilla(currentCasilla.getId(), 0);
+					} catch (NullPointerException e2) {}
+				} else if (b.getText() == "Comprobar") {
+					try {
+						Juego.getJuego().comprobarSolucion();
+						String mensaje = Juego.getJuego().getMensaje();
+						getInfo().setText(mensaje);
 					} catch (NullPointerException e2) {}
 				}
 			}
