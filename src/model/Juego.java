@@ -43,9 +43,11 @@ public class Juego extends Observable {
 	 * @param pCasilla
 	 * @param pCanditatos
 	 */
-	public void updateCandidatos(int pCasilla, List<Integer> pCanditatos) {
+	public void updateCandidatos(int pCasilla, List<Integer> pCandidatos) {
 		// TODO - implement Juego.updateCandidatos
-		throw new UnsupportedOperationException();
+		Cuadricula.getCuadricula().updateCandidatos(pCasilla, pCandidatos);
+		setChanged();
+		notifyObservers();
 	}
 
 
@@ -78,5 +80,15 @@ public class Juego extends Observable {
 		}
 		return niveles;
 	}
-
+	
+	public Map<Integer, List<Integer>> getCandidatos(){
+		return Cuadricula.getCuadricula().getCandidatos();
+	}
+	
+	
+	
+	
+	
+	
+	
 }

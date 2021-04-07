@@ -59,7 +59,9 @@ public class Casilla implements ICasillaEstado{
 
 	public boolean esRepetido(int pValor, int pid) {
 		if (esProcesado == false) {
+
 			if (valor == pValor && id != pid && pValor!= 0) {
+
 				esProcesado = true;
 				tieneError = true;
 				
@@ -122,6 +124,11 @@ public class Casilla implements ICasillaEstado{
 	public void setEstado() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public List<Integer> getCandidatos() {
+		// TODO Auto-generated method stub
+		return candidatos;
 	}
 
 }

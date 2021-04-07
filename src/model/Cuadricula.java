@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -104,7 +105,14 @@ public class Cuadricula {
 		menReg += "\n";
 		return mensaje + menCol + menLin + menReg;
 	}
-	
+	public Map<Integer, List<Integer>> getCandidatos(){
+		Map<Integer, List<Integer>> todosLosCandidatos = new HashMap<Integer, List<Integer>>();
+		for (Casilla casilla : listaCasillas)
+		{
+			todosLosCandidatos.put( casilla.getId(), casilla.getCandidatos());
+		}
+		return todosLosCandidatos;
+	}
 	/**
 	 * 
 	 * @param pCasilla
@@ -112,7 +120,12 @@ public class Cuadricula {
 	 */
 	public boolean updateCandidatos(int pCasilla, List<Integer> pCandidatos) {
 		// TODO - implement Cuadricula.updateCandidatos
-		throw new UnsupportedOperationException();
+		for (Casilla casilla: listaCasillas) {
+			if (casilla.getId() == pCasilla) {
+				casilla.setCandidatos(pCandidatos);
+			}
+		}
+		return true;
 	}
 
 	public Map<Integer, Integer> getValores() {

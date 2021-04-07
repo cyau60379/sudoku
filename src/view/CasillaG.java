@@ -1,8 +1,12 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class CasillaG extends JButton {
 
@@ -72,5 +76,16 @@ public class CasillaG extends JButton {
 			color = new Color(213, 202, 224);
 		}
 		return color;
+	}
+	public void setCandidatos (List<Integer> pCandidatos)
+	{
+		if (getText() == "") {
+			String result = pCandidatos.stream().map(n -> String.valueOf(n)).collect(Collectors.joining(","));
+			this.setText(result);
+            this.setFont(new Font("Tahoma", Font.PLAIN, 9));
+            this.setVerticalAlignment(SwingConstants.TOP);
+			
+		}
+		
 	}
 }

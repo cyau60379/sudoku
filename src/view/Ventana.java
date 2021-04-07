@@ -1,15 +1,12 @@
 package view;
-
 import java.awt.BorderLayout;
-
+import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import model.Juego;
-
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -17,9 +14,11 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -44,6 +43,7 @@ public class Ventana extends JFrame implements Observer {
 	private JButton btnRestablecer;
 	private JButton btnAyuda;
 	private JButton btnComprobar;
+	private JButton btnCandidatos;
 	private JTextPane info;
 	// Grid elements
 	private JPanel cuadricula;
@@ -63,7 +63,7 @@ public class Ventana extends JFrame implements Observer {
 	private void initialize() {
 		setTitle("Sudoku");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 450);
+		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -76,34 +76,42 @@ public class Ventana extends JFrame implements Observer {
 	private JPanel getEditor() {
 		if (editor == null) {
 			editor = new JPanel();
+			
+
 			GroupLayout gl_panel = new GroupLayout(editor);
 			gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.TRAILING)
+				gl_panel.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_panel.createSequentialGroup()
-						.addGap(7)
-						.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-						.addContainerGap())
-					.addGroup(gl_panel.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-							.addComponent(getLblCandidatos())
-							.addComponent(getLblValor()))
-						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-							.addComponent(getBtnModificar())
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(getBtnRestablecer()))
-								.addComponent(getTextField())))
-						.addGap(19))
-					.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-						.addGap(35)
-						.addComponent(getBtnAyuda())
-						.addGap(18)
-						.addComponent(getBtnComprobar())
-						.addContainerGap(27, Short.MAX_VALUE))
+							.addGroup(gl_panel.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+									.addComponent(getLblCandidatos())
+									.addComponent(getLblValor()))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(getBtnModificar())
+										.addGap(19))
+									.addGroup(gl_panel.createSequentialGroup()
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+											.addGroup(gl_panel.createSequentialGroup()
+												.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(getBtnRestablecer()))
+											.addComponent(getTextField()))
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(getBtnCandidatos())))
+								.addPreferredGap(ComponentPlacement.RELATED))
+							.addGroup(gl_panel.createSequentialGroup()
+								.addGap(35)
+								.addComponent(getBtnAyuda())
+								.addGap(18)
+								.addComponent(getBtnComprobar()))
+							.addGroup(gl_panel.createSequentialGroup()
+								.addGap(7)
+								.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)))
+						.addContainerGap())
 			);
 			gl_panel.setVerticalGroup(
 				gl_panel.createParallelGroup(Alignment.LEADING)
@@ -111,7 +119,8 @@ public class Ventana extends JFrame implements Observer {
 						.addGap(5)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(getLblCandidatos())
-							.addComponent(getTextField(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addComponent(getTextField(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(getBtnCandidatos()))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(getLblValor())
@@ -124,7 +133,7 @@ public class Ventana extends JFrame implements Observer {
 							.addComponent(getBtnAyuda())
 							.addComponent(getBtnComprobar()))
 						.addGap(18)
-						.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+						.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
 						.addContainerGap())
 			);
 			editor.setLayout(gl_panel);
@@ -160,6 +169,14 @@ public class Ventana extends JFrame implements Observer {
 			valor.setModel(new SpinnerNumberModel(1, 1, 9, 1));
 		}
 		return valor;
+	}
+	
+	private JButton getBtnCandidatos() {
+		if (btnCandidatos == null) {
+			btnCandidatos = new JButton("Candidatos");
+			btnCandidatos.addActionListener(getControlador());
+		}
+		return btnCandidatos;
 	}
 
 	private JButton getBtnModificar() {
@@ -217,7 +234,6 @@ public class Ventana extends JFrame implements Observer {
 		return cuadricula;
 	}
 	
-
 	private JButton getBtnCasilla(int index, int value) {
 		if (listaCasillas.size() <= index || listaCasillas.get(index) == null) {
 			String sValue;
@@ -236,17 +252,19 @@ public class Ventana extends JFrame implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		
-		Map<Integer, Integer> mapValores = Juego.getJuego().getPartida();
-		listaCasillas.stream().forEach(p -> p.setValue(mapValores.get(p.getId())));
-		
-
-		Map<Integer, Boolean> mapDefaultValores = Juego.getJuego().getDefaultValues();
-		listaCasillas.stream().forEach(p -> p.setDefaultValue(mapDefaultValores.get(p.getId())));
 		
 		Map<Integer, Boolean> valorError = Juego.getJuego().getTieneError();
 		listaCasillas.stream().forEach(p -> p.tieneError(valorError.get(p.getId())));
 		
-
+		Map<Integer, Integer> mapValores = Juego.getJuego().getPartida();
+		listaCasillas.stream().forEach(p -> p.setValue(mapValores.get(p.getId())));
+		
+		Map<Integer, List<Integer>> candidatos = Juego.getJuego().getCandidatos();
+		listaCasillas.stream().forEach(p -> p.setCandidatos(candidatos.get(p.getId())));
+		
+		Map<Integer, Boolean> mapDefaultValores = Juego.getJuego().getDefaultValues();
+		listaCasillas.stream().forEach(p -> p.setDefaultValue(mapDefaultValores.get(p.getId())));
+		
 		}
 
 	// Controller
@@ -280,13 +298,27 @@ public class Ventana extends JFrame implements Observer {
 				} else if (b.getText() == "Restablecer") {
 					try {
 						Juego.getJuego().updateCasilla(currentCasilla.getId(), 0);
+						Juego.getJuego().updateCandidatos(currentCasilla.getId(), new ArrayList());
 					} catch (NullPointerException e2) {}
+
 				} else if (b.getText() == "Comprobar") {
 					try {
 						Juego.getJuego().comprobarSolucion();
 						String mensaje = Juego.getJuego().getMensaje();
 						getInfo().setText(mensaje);
 					} catch (NullPointerException e2) {}
+
+				} else if (b.getText() == "Candidatos") {
+					try {
+						List <Integer> listaCandidatos = new ArrayList <Integer>();
+						String[] arr = getTextField().getText().split(",");
+					
+						for (String a: arr) {
+						    listaCandidatos.add(Integer.parseInt(a));
+						}
+						Juego.getJuego().updateCandidatos(currentCasilla.getId(), listaCandidatos);
+
+					} catch(NumberFormatException | NullPointerException e2) {}
 				}
 			}
 		}
