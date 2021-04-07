@@ -82,29 +82,25 @@ public class Cuadricula {
 	}
 
 	public String getMensaje() {
-		List<Casilla> errors = listaCasillas.stream().filter(p -> p.getTieneError() && p.getValor() != 0 && p.getDefaultValue()==false).collect(Collectors.toList());
-		int numErrors = errors.size();
-		List<Integer> columnas = errors.stream().map(Casilla::getColumna).distinct().collect(Collectors.toList());
-		List<Integer> lineas = errors.stream().map(Casilla::getLinea).distinct().collect(Collectors.toList());
-		List<Integer> regiones = errors.stream().map(Casilla::getRegion).distinct().collect(Collectors.toList());
-		String mensaje = "Numero de errores: " + Integer.toString(numErrors) + "\n";
+		String mensaje = "Numero de errores: " + Integer.toString(getErrors().size()) + "\n";
 		String menCol = "columnas: ";
-		for (Integer i : columnas) {
+		for (Integer i : getColumnasConError()) {
 			menCol += Integer.toString(i) + " ";
 		}
 		menCol += "\n";
 		String menLin = "lineas: ";
-		for (Integer i : lineas) {
+		for (Integer i : getLineasConError()) {
 			menLin += Integer.toString(i) + " ";
 		}
 		menLin += "\n";
 		String menReg = "regiones: ";
-		for (Integer i : regiones) {
+		for (Integer i : getRegionesConError()) {
 			menReg += Integer.toString(i) + " ";
 		}
 		menReg += "\n";
 		return mensaje + menCol + menLin + menReg;
 	}
+
 	public Map<Integer, List<Integer>> getCandidatos(){
 		Map<Integer, List<Integer>> todosLosCandidatos = new HashMap<Integer, List<Integer>>();
 		for (Casilla casilla : listaCasillas)
@@ -140,5 +136,22 @@ public class Cuadricula {
 		return listaCasillas.stream().collect(Collectors.toMap(Casilla::getId, Casilla::getTieneError));
 	}
 	
+	public List<Casilla> getErrors() {
+		return listaCasillas.stream()
+				.filter(p -> p.getTieneError() && p.getDefaultValue() == false)
+				.collect(Collectors.toList());
+	}
+	
+	public List<Integer> getLineasConError() {
+		return getErrors().stream().map(Casilla::getLinea).distinct().collect(Collectors.toList());
+	}
+	
+	public List<Integer> getColumnasConError() {
+		return getErrors().stream().map(Casilla::getColumna).distinct().collect(Collectors.toList());
+	}
+	
+	public List<Integer> getRegionesConError() {
+		return getErrors().stream().map(Casilla::getRegion).distinct().collect(Collectors.toList());
+	}
 
 }

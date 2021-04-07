@@ -5,7 +5,7 @@ import java.util.List;
 
 import model.Estados.ICasillaEstado;
 
-public class Casilla implements ICasillaEstado{
+public class Casilla implements ICasillaEstado {
 
 	private int id;
 	private int valor;
@@ -59,15 +59,11 @@ public class Casilla implements ICasillaEstado{
 
 	public boolean esRepetido(int pValor, int pid) {
 		if (esProcesado == false) {
-
-			if (valor == pValor && id != pid && pValor!= 0) {
-
+			if (valor == pValor && id != pid && pValor != 0) {
 				esProcesado = true;
 				tieneError = true;
-				
 				return true;
 			}
-			
 			esProcesado = false;
 			tieneError = false;
 			return false;
@@ -123,7 +119,7 @@ public class Casilla implements ICasillaEstado{
 	@Override
 	public void setEstado() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public List<Integer> getCandidatos() {

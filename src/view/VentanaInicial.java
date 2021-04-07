@@ -130,11 +130,11 @@ public class VentanaInicial extends JFrame implements Observer {
 		}
 		return btnJugar;
 	}
-	
+
 	private void close() {
 		this.dispose();
 	}
-	
+
 	// Controller
 
 	private Controlador getControlador() {
@@ -143,12 +143,12 @@ public class VentanaInicial extends JFrame implements Observer {
 		}
 		return controlador;
 	}
-	
+
 	private class Controlador implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			Juego.getJuego().begin(getTextNombre().getText(), (int) getComboBox().getSelectedItem());
-			close(); //closes the window--cannot be recovered
+			close(); // closes the window--cannot be recovered
 			Ventana ventana = new Ventana();
 			ventana.setVisible(true);
 		}
@@ -159,4 +159,5 @@ public class VentanaInicial extends JFrame implements Observer {
 		List<Integer> niveles = Juego.getJuego().getNiveles();
 		niveles.stream().forEach(p -> getComboBox().addItem(p));
 	}
+
 }

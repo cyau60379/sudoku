@@ -50,8 +50,6 @@ public class Juego extends Observable {
 		notifyObservers();
 	}
 
-
-
 	public Map<Integer, Integer> getPartida() {
 		return Cuadricula.getCuadricula().getValores();
 	}
@@ -64,13 +62,26 @@ public class Juego extends Observable {
 		return Cuadricula.getCuadricula().getTieneError();
 	}
 
+	public List<Integer> getLineasConError() {
+		return Cuadricula.getCuadricula().getLineasConError();
+	}
+
+	public List<Integer> getColumnasConError() {
+		return Cuadricula.getCuadricula().getColumnasConError();
+	}
+
+	public List<Integer> getRegionesConError() {
+		return Cuadricula.getCuadricula().getRegionesConError();
+	}
+
 	public String getMensaje() {
 		return Cuadricula.getCuadricula().getMensaje();
 	}
+
 	public void comprobarSolucion() {
-		 Cuadricula.getCuadricula().comprobarSolucion();
-			setChanged();
-			notifyObservers();
+		Cuadricula.getCuadricula().comprobarSolucion();
+		setChanged();
+		notifyObservers();
 	}
 
 	public List<Integer> getNiveles() {
@@ -80,15 +91,9 @@ public class Juego extends Observable {
 		}
 		return niveles;
 	}
-	
-	public Map<Integer, List<Integer>> getCandidatos(){
+
+	public Map<Integer, List<Integer>> getCandidatos() {
 		return Cuadricula.getCuadricula().getCandidatos();
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }
