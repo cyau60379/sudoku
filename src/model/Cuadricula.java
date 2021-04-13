@@ -123,7 +123,24 @@ public class Cuadricula {
 		}
 		return true;
 	}
-
+	
+	public void calcularCandidatos(int  pCasilla) {
+		Casilla casilla=listaCasillas.get(pCasilla);
+		List<Integer> columnas = listaCasillas.stream().filter(p -> p.getColumna() == casilla.getColumna()).map(Casilla::getValor).collect(Collectors.toList());
+		List<Integer> lineas = listaCasillas.stream().filter(p -> p.getLinea() == casilla.getLinea())
+				.map(Casilla::getValor).collect(Collectors.toList());
+		List<Integer> regiones = listaCasillas.stream().filter(p -> p.getRegion() == casilla.getRegion())
+				.map(Casilla::getValor).collect(Collectors.toList());
+		List<Integer> candidatos = new ArrayList<Integer>();
+		
+		for (int i=1;i<10;i++) {
+			if (!columnas.contains(i) && !lineas.contains(i) && !regiones.contains(i)) {
+				candidatos.add(i);
+			}
+		}
+		casilla.setCandidatos(candidatos);
+	}
+	
 	public Map<Integer, Integer> getValores() {
 		return listaCasillas.stream().collect(Collectors.toMap(Casilla::getId, Casilla::getValor));
 	}

@@ -90,7 +90,7 @@ public class Casilla implements ICasillaEstado {
 	public void setCandidatos(List<Integer> pCandidatos) {
 		this.candidatos = pCandidatos;
 	}
-
+	
 	public int getValor() {
 		return valor;
 	}

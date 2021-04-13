@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Casilla;
 import model.Juego;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
@@ -40,6 +42,7 @@ public class Ventana extends JFrame implements Observer {
 	private JButton btnAyuda;
 	private JButton btnComprobar;
 	private JButton btnCandidatos;
+	private JButton btnCalcularCandidatos;
 	private JTextPane info;
 	// Grid elements
 	private JPanel cuadricula;
@@ -70,52 +73,74 @@ public class Ventana extends JFrame implements Observer {
 	private JPanel getEditor() {
 		if (editor == null) {
 			editor = new JPanel();
+			
+			JButton btnCalcularCandidatos = new JButton("CalCandidatos");
+			btnCalcularCandidatos.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
 
 			GroupLayout gl_panel = new GroupLayout(editor);
-			gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-					.createSequentialGroup().addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
-							.createSequentialGroup().addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-									.addComponent(getLblCandidatos()).addComponent(getLblValor()))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
-									.createSequentialGroup()
-									.addComponent(getTextField(), GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED).addComponent(getBtnCandidatos())
-									.addGap(5))
-									.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-											.addComponent(getValor(), GroupLayout.PREFERRED_SIZE,
-													GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(getBtnModificar())))
-							.addGap(14))
-							.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
-									.createParallelGroup(Alignment.LEADING, false)
-									.addGroup(gl_panel.createSequentialGroup().addComponent(getBtnComprobar())
-											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
-													Short.MAX_VALUE)
-											.addComponent(getBtnRestablecer()))
-									.addComponent(getInfo(), Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 273,
-											GroupLayout.PREFERRED_SIZE))
-									.addContainerGap())
-							.addGroup(gl_panel.createSequentialGroup().addComponent(getBtnAyuda()).addGap(110)))));
-			gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel.createSequentialGroup().addGap(5)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(getLblCandidatos())
-									.addComponent(getTextField(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-											GroupLayout.PREFERRED_SIZE)
-									.addComponent(getBtnCandidatos()))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(getLblValor())
-									.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-											GroupLayout.PREFERRED_SIZE)
-									.addComponent(getBtnModificar()))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(getBtnComprobar())
-									.addComponent(getBtnRestablecer()))
-							.addGap(34).addComponent(getBtnAyuda()).addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-							.addContainerGap()));
+			gl_panel.setHorizontalGroup(
+				gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_panel.createSequentialGroup()
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+									.addComponent(getLblCandidatos())
+									.addComponent(getLblValor()))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(getTextField(), GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(getBtnCandidatos())
+										.addGap(5))
+									.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(getBtnModificar())))
+								.addGap(14))
+							.addGroup(gl_panel.createSequentialGroup()
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+									.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(getBtnComprobar())
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(getBtnRestablecer()))
+									.addComponent(getInfo(), Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE))
+								.addContainerGap())
+							.addGroup(gl_panel.createSequentialGroup()
+								.addComponent(getBtnAyuda())
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(getBtnCalcularCandidatos())
+								.addGap(15))))
+			);
+			gl_panel.setVerticalGroup(
+				gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createSequentialGroup()
+						.addGap(5)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getLblCandidatos())
+							.addComponent(getTextField(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(getBtnCandidatos()))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getLblValor())
+							.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(getBtnModificar()))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getBtnComprobar())
+							.addComponent(getBtnRestablecer()))
+						.addGap(34)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getBtnAyuda())
+							.addComponent(getBtnCalcularCandidatos()))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+						.addContainerGap())
+			);
 			editor.setLayout(gl_panel);
 		}
 		return editor;
@@ -181,6 +206,14 @@ public class Ventana extends JFrame implements Observer {
 			btnAyuda.addActionListener(getControlador());
 		}
 		return btnAyuda;
+	}
+	
+	private JButton getBtnCalcularCandidatos() {
+		if (btnCalcularCandidatos == null) {
+			btnCalcularCandidatos = new JButton("CalCandidatos");
+			btnCalcularCandidatos.addActionListener(getControlador());
+		}
+		return btnCalcularCandidatos;
 	}
 
 	private JButton getBtnComprobar() {
@@ -263,6 +296,7 @@ public class Ventana extends JFrame implements Observer {
 	private class Controlador implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			
 			if (e.getSource() instanceof CasillaG) { // click on a square of the sudoku
 				CasillaG c = (CasillaG) e.getSource();
 				if (c.getDefaultValue() == false) { // do something if it is an editable square
@@ -284,6 +318,13 @@ public class Ventana extends JFrame implements Observer {
 						Juego.getJuego().updateCasilla(currentCasilla.getId(),
 								Integer.parseInt(valor.getValue().toString()));
 					} catch (NullPointerException e2) {}
+				}
+				else if (b.getText() == "CalCandidatos") {
+					try {
+						Juego.getJuego().calcularCandidatos(currentCasilla.getId());
+						
+					} catch (NullPointerException e2) {}
+				
 				} else if (b.getText() == "Restablecer") {
 					try {
 						Juego.getJuego().updateCasilla(currentCasilla.getId(), 0);
@@ -310,5 +351,4 @@ public class Ventana extends JFrame implements Observer {
 			}
 		}
 	}
-
 }

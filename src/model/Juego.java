@@ -50,6 +50,11 @@ public class Juego extends Observable {
 		notifyObservers();
 	}
 
+	public void calcularCandidatos(int pCasilla) {
+		Cuadricula.getCuadricula().calcularCandidatos(pCasilla);
+		setChanged();
+		notifyObservers();
+	}
 	public Map<Integer, Integer> getPartida() {
 		return Cuadricula.getCuadricula().getValores();
 	}
