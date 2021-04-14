@@ -146,17 +146,6 @@ class CasillaTests {
 	}
 
 	@Test
-	public void returnDirectlyTrueIfAlreadyProcessed() {
-		try {
-			Casilla casilla = new Casilla(1, 3, 0, 0, 0);
-			casilla.setEsProcesado(true); // TODO: change with setEstado() when implemented
-			assertTrue(casilla.esRepetido(3, 1));
-		} catch (IllegalArgumentException e) {
-			fail("Wrong definition of Casilla: please verify your implementation");
-		}
-	}
-
-	@Test
 	public void setValorWithNegativeValue() {
 		try {
 			Casilla casilla = new Casilla(1, 3, 0, 0, 0);

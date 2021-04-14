@@ -1,5 +1,5 @@
 package model.Estados;
 
 public interface ICasillaEstado {
-	public void setEstado();
+	public void setEstado(EstadoCasilla pEstado);
 }

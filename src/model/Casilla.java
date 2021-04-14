@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Estados.EstadoCasilla;
 import model.Estados.ICasillaEstado;
+import model.Estados.Inicial;
 
 public class Casilla implements ICasillaEstado {
 
@@ -14,8 +16,7 @@ public class Casilla implements ICasillaEstado {
 	private int columna;
 	private List<Integer> candidatos;
 	private boolean defaultValue;
-	private boolean tieneError;
-	private boolean esProcesado;
+	private EstadoCasilla estado;
 
 	/**
 	 * 
@@ -35,15 +36,13 @@ public class Casilla implements ICasillaEstado {
 		region = pRegion;
 		linea = pLinea;
 		columna = pColumna;
-		tieneError = false;
-		esProcesado = false;
 		candidatos = new ArrayList<>();
 		if (pValor != 0) {
 			defaultValue = true;
 		} else {
 			defaultValue = false;
 		}
-
+		setEstado(new Inicial(this));
 	}
 
 	/**
@@ -57,30 +56,16 @@ public class Casilla implements ICasillaEstado {
 		this.valor = pValor;
 	}
 
-	public boolean esRepetido(int pValor, int pid) {
-		if (esProcesado == false) {
-			if (valor == pValor && id != pid && pValor != 0) {
-				esProcesado = true;
-				tieneError = true;
-				return true;
-			}
-			esProcesado = false;
-			tieneError = false;
-			return false;
-		}
-		return true;
+	public boolean esRepetido(int pValor, int pId) {
+		return estado.verificarConActual(this.id, this.valor, pId, pValor);
 	}
 
 	public boolean getTieneError() {
-		return tieneError;
+		return estado.tieneError();
 	}
 
-	public void setTieneError(boolean ptieneError) {
-		tieneError = ptieneError;
-	}
-
-	public void setEsProcesado(boolean pEsProcesado) {
-		esProcesado = pEsProcesado;
+	public void reinicializarProcesado() {
+		estado.reinicializarProcesado();
 	}
 
 	/**
@@ -90,7 +75,7 @@ public class Casilla implements ICasillaEstado {
 	public void setCandidatos(List<Integer> pCandidatos) {
 		this.candidatos = pCandidatos;
 	}
-	
+
 	public int getValor() {
 		return valor;
 	}
@@ -117,13 +102,12 @@ public class Casilla implements ICasillaEstado {
 	}
 
 	@Override
-	public void setEstado() {
-		// TODO Auto-generated method stub
+	public void setEstado(EstadoCasilla pEstado) {
+		this.estado = pEstado;
 
 	}
 
 	public List<Integer> getCandidatos() {
-		// TODO Auto-generated method stub
 		return candidatos;
 	}
 

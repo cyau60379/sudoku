@@ -4,22 +4,23 @@ public class ProcesadoError implements EstadoCasilla {
 
 	private ICasillaEstado casilla;
 	
+	public ProcesadoError(ICasillaEstado pCasilla) {
+		casilla = pCasilla;
+	}
+	
 	@Override
-	public void verificarConActual(int pId, int pValor) {
-		// TODO Auto-generated method stub
-
+	public boolean verificarConActual(int actId, int actValor, int pId, int pValor) {
+		return true;
 	}
 
 	@Override
 	public void reinicializarProcesado() {
-		// TODO Auto-generated method stub
-
+		casilla.setEstado(new Error(casilla));
 	}
 
 	@Override
 	public boolean tieneError() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

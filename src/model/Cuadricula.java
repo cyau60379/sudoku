@@ -73,7 +73,7 @@ public class Cuadricula {
 	}
 
 	public void reinicio(List<Casilla> pLista) {
-		pLista.stream().forEach(c -> c.setEsProcesado(false));
+		pLista.stream().forEach(Casilla::reinicializarProcesado);
 	}
 
 	public void comprobarSolucion() {
@@ -101,14 +101,14 @@ public class Cuadricula {
 		return mensaje + menCol + menLin + menReg;
 	}
 
-	public Map<Integer, List<Integer>> getCandidatos(){
+	public Map<Integer, List<Integer>> getCandidatos() {
 		Map<Integer, List<Integer>> todosLosCandidatos = new HashMap<Integer, List<Integer>>();
-		for (Casilla casilla : listaCasillas)
-		{
-			todosLosCandidatos.put( casilla.getId(), casilla.getCandidatos());
+		for (Casilla casilla : listaCasillas) {
+			todosLosCandidatos.put(casilla.getId(), casilla.getCandidatos());
 		}
 		return todosLosCandidatos;
 	}
+
 	/**
 	 * 
 	 * @param pCasilla
@@ -116,31 +116,32 @@ public class Cuadricula {
 	 */
 	public boolean updateCandidatos(int pCasilla, List<Integer> pCandidatos) {
 		// TODO - implement Cuadricula.updateCandidatos
-		for (Casilla casilla: listaCasillas) {
+		for (Casilla casilla : listaCasillas) {
 			if (casilla.getId() == pCasilla) {
 				casilla.setCandidatos(pCandidatos);
 			}
 		}
 		return true;
 	}
-	
-	public void calcularCandidatos(int  pCasilla) {
-		Casilla casilla=listaCasillas.get(pCasilla);
-		List<Integer> columnas = listaCasillas.stream().filter(p -> p.getColumna() == casilla.getColumna()).map(Casilla::getValor).collect(Collectors.toList());
+
+	public void calcularCandidatos(int pCasilla) {
+		Casilla casilla = listaCasillas.get(pCasilla);
+		List<Integer> columnas = listaCasillas.stream().filter(p -> p.getColumna() == casilla.getColumna())
+				.map(Casilla::getValor).collect(Collectors.toList());
 		List<Integer> lineas = listaCasillas.stream().filter(p -> p.getLinea() == casilla.getLinea())
 				.map(Casilla::getValor).collect(Collectors.toList());
 		List<Integer> regiones = listaCasillas.stream().filter(p -> p.getRegion() == casilla.getRegion())
 				.map(Casilla::getValor).collect(Collectors.toList());
 		List<Integer> candidatos = new ArrayList<Integer>();
-		
-		for (int i=1;i<10;i++) {
+
+		for (int i = 1; i < 10; i++) {
 			if (!columnas.contains(i) && !lineas.contains(i) && !regiones.contains(i)) {
 				candidatos.add(i);
 			}
 		}
 		casilla.setCandidatos(candidatos);
 	}
-	
+
 	public Map<Integer, Integer> getValores() {
 		return listaCasillas.stream().collect(Collectors.toMap(Casilla::getId, Casilla::getValor));
 	}
@@ -152,21 +153,20 @@ public class Cuadricula {
 	public Map<Integer, Boolean> getTieneError() {
 		return listaCasillas.stream().collect(Collectors.toMap(Casilla::getId, Casilla::getTieneError));
 	}
-	
+
 	public List<Casilla> getErrors() {
-		return listaCasillas.stream()
-				.filter(p -> p.getTieneError() && p.getDefaultValue() == false)
+		return listaCasillas.stream().filter(p -> p.getTieneError() && p.getDefaultValue() == false)
 				.collect(Collectors.toList());
 	}
-	
+
 	public List<Integer> getLineasConError() {
 		return getErrors().stream().map(Casilla::getLinea).distinct().collect(Collectors.toList());
 	}
-	
+
 	public List<Integer> getColumnasConError() {
 		return getErrors().stream().map(Casilla::getColumna).distinct().collect(Collectors.toList());
 	}
-	
+
 	public List<Integer> getRegionesConError() {
 		return getErrors().stream().map(Casilla::getRegion).distinct().collect(Collectors.toList());
 	}
