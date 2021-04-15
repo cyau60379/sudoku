@@ -93,6 +93,7 @@ class CuadriculaTests {
 		Cuadricula.getCuadricula().init("", myNumbers);
 		Cuadricula.getCuadricula().updateCasilla(0, 1);
 		Cuadricula.getCuadricula().updateCasilla(1, 1);
+		Cuadricula.getCuadricula().comprobarSolucion();
 		assertEquals("Numero de errores: 2\ncolumnas: 0 1 \nlineas: 0 \nregiones: 0 \n", Cuadricula.getCuadricula().getMensaje());
 	}
 }
