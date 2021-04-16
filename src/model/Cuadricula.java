@@ -2,8 +2,10 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Cuadricula {
@@ -13,7 +15,7 @@ public class Cuadricula {
 	private String idPartida;
 
 	private Cuadricula() {
-		// TODO implement constructor
+		
 	}
 
 	// getter
@@ -36,6 +38,7 @@ public class Cuadricula {
 			region = 3 * (linea / 3) + (columna / 3);
 			listaCasillas.add(new Casilla(i, pSudoku.get(i), region, linea, columna));
 		}
+		calcularTodosLosCandidatos();
 	}
 
 	/**
@@ -53,7 +56,7 @@ public class Cuadricula {
 		}
 	}
 
-	public void comprobarValorCasilla(Casilla casilla) {
+	private void comprobarValorCasilla(Casilla casilla) {
 		List<Casilla> columnas = listaCasillas.stream().filter(p -> p.getColumna() == casilla.getColumna())
 				.collect(Collectors.toList());
 		List<Casilla> lineas = listaCasillas.stream().filter(p -> p.getLinea() == casilla.getLinea())
@@ -101,10 +104,10 @@ public class Cuadricula {
 		return mensaje + menCol + menLin + menReg;
 	}
 
-	public Map<Integer, List<Integer>> getCandidatos() {
-		Map<Integer, List<Integer>> todosLosCandidatos = new HashMap<Integer, List<Integer>>();
+	public Map<Integer, Set<Integer>> getCandidatos() {
+		Map<Integer, Set<Integer>> todosLosCandidatos = new HashMap<Integer, Set<Integer>>();
 		for (Casilla casilla : listaCasillas) {
-			todosLosCandidatos.put(casilla.getId(), casilla.getCandidatos());
+			todosLosCandidatos.put(casilla.getId(), casilla.getCandidatosUsuario());
 		}
 		return todosLosCandidatos;
 	}
@@ -112,19 +115,21 @@ public class Cuadricula {
 	/**
 	 * 
 	 * @param pCasilla
-	 * @param pCandidatos
+	 * @param listaCandidatos
 	 */
-	public boolean updateCandidatos(int pCasilla, List<Integer> pCandidatos) {
-		// TODO - implement Cuadricula.updateCandidatos
-		for (Casilla casilla : listaCasillas) {
-			if (casilla.getId() == pCasilla) {
-				casilla.setCandidatos(pCandidatos);
-			}
-		}
+	public boolean updateCandidatos(int pCasilla, Set<Integer> listaCandidatos) {
+		Casilla casilla = listaCasillas.get(pCasilla);
+		listaCandidatos = listaCandidatos.stream().filter(p -> p > 0 && p < 10).collect(Collectors.toSet());
+		casilla.setCandidatosUsuario(listaCandidatos);
 		return true;
 	}
 
-	public void calcularCandidatos(int pCasilla) {
+	public void autoUpdateCandidatos(int pCasilla) {
+		Casilla casilla = listaCasillas.get(pCasilla);
+		casilla.setCandidatosUsuario(calcularCandidatos(pCasilla));
+	}
+
+	private Set<Integer> calcularCandidatos(int pCasilla) {
 		Casilla casilla = listaCasillas.get(pCasilla);
 		List<Integer> columnas = listaCasillas.stream().filter(p -> p.getColumna() == casilla.getColumna())
 				.map(Casilla::getValor).collect(Collectors.toList());
@@ -132,14 +137,18 @@ public class Cuadricula {
 				.map(Casilla::getValor).collect(Collectors.toList());
 		List<Integer> regiones = listaCasillas.stream().filter(p -> p.getRegion() == casilla.getRegion())
 				.map(Casilla::getValor).collect(Collectors.toList());
-		List<Integer> candidatos = new ArrayList<Integer>();
+		Set<Integer> candidatos = new HashSet<Integer>();
 
 		for (int i = 1; i < 10; i++) {
 			if (!columnas.contains(i) && !lineas.contains(i) && !regiones.contains(i)) {
 				candidatos.add(i);
 			}
 		}
-		casilla.setCandidatos(candidatos);
+		return candidatos;
+	}
+
+	private void calcularTodosLosCandidatos() {
+		listaCasillas.stream().forEach(p -> p.setCandidatos(calcularCandidatos(p.getId())));
 	}
 
 	public Map<Integer, Integer> getValores() {

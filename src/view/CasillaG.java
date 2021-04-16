@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.swing.JButton;
@@ -87,7 +88,7 @@ public class CasillaG extends JButton {
 		return color;
 	}
 
-	public void setCandidatos(List<Integer> pCandidatos) {
+	public void setCandidatos(Set<Integer> pCandidatos) {
 		if (getText() == "") {
 			String result = pCandidatos.stream().map(n -> String.valueOf(n)).collect(Collectors.joining(","));
 			this.setText(result);

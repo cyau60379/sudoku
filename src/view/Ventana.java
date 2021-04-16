@@ -20,10 +20,12 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 public class Ventana extends JFrame implements Observer {
 
@@ -268,7 +270,7 @@ public class Ventana extends JFrame implements Observer {
 		Map<Integer, Integer> mapValores = Juego.getJuego().getPartida();
 		listaCasillas.stream().forEach(p -> p.setValue(mapValores.get(p.getId())));
 
-		Map<Integer, List<Integer>> candidatos = Juego.getJuego().getCandidatos();
+		Map<Integer, Set<Integer>> candidatos = Juego.getJuego().getCandidatos();
 		listaCasillas.stream().forEach(p -> p.setCandidatos(candidatos.get(p.getId())));
 
 		List<Integer> lineas = Juego.getJuego().getLineasConError();
@@ -321,14 +323,13 @@ public class Ventana extends JFrame implements Observer {
 				}
 				else if (b.getText() == "CalCandidatos") {
 					try {
-						Juego.getJuego().calcularCandidatos(currentCasilla.getId());
-						
+						Juego.getJuego().autoUpdateCandidatos(currentCasilla.getId());
 					} catch (NullPointerException e2) {}
 				
 				} else if (b.getText() == "Restablecer") {
 					try {
 						Juego.getJuego().updateCasilla(currentCasilla.getId(), 0);
-						Juego.getJuego().updateCandidatos(currentCasilla.getId(), new ArrayList<>());
+						Juego.getJuego().updateCandidatos(currentCasilla.getId(), new HashSet<>());
 					} catch (NullPointerException e2) {}
 				} else if (b.getText() == "Comprobar") {
 					try {
@@ -338,7 +339,7 @@ public class Ventana extends JFrame implements Observer {
 					} catch (NullPointerException e2) {}
 				} else if (b.getText() == "Cambiar") {
 					try {
-						List<Integer> listaCandidatos = new ArrayList<Integer>();
+						Set<Integer> listaCandidatos = new HashSet<Integer>();
 						String[] arr = getTextField().getText().split(",");
 
 						for (String a : arr) {

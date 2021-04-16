@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Set;
 
 import model.Sudoku.ListaSudokus;
 
@@ -43,18 +44,19 @@ public class Juego extends Observable {
 	 * @param pCasilla
 	 * @param pCanditatos
 	 */
-	public void updateCandidatos(int pCasilla, List<Integer> pCandidatos) {
+	public void updateCandidatos(int pCasilla, Set<Integer> listaCandidatos) {
 		// TODO - implement Juego.updateCandidatos
-		Cuadricula.getCuadricula().updateCandidatos(pCasilla, pCandidatos);
+		Cuadricula.getCuadricula().updateCandidatos(pCasilla, listaCandidatos);
 		setChanged();
 		notifyObservers();
 	}
 
-	public void calcularCandidatos(int pCasilla) {
-		Cuadricula.getCuadricula().calcularCandidatos(pCasilla);
+	public void autoUpdateCandidatos(int pCasilla) {
+		Cuadricula.getCuadricula().autoUpdateCandidatos(pCasilla);
 		setChanged();
 		notifyObservers();
 	}
+
 	public Map<Integer, Integer> getPartida() {
 		return Cuadricula.getCuadricula().getValores();
 	}
@@ -97,7 +99,7 @@ public class Juego extends Observable {
 		return niveles;
 	}
 
-	public Map<Integer, List<Integer>> getCandidatos() {
+	public Map<Integer, Set<Integer>> getCandidatos() {
 		return Cuadricula.getCuadricula().getCandidatos();
 	}
 

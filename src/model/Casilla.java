@@ -1,7 +1,7 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import model.Estados.EstadoCasilla;
 import model.Estados.ICasillaEstado;
@@ -14,7 +14,8 @@ public class Casilla implements ICasillaEstado {
 	private int region;
 	private int linea;
 	private int columna;
-	private List<Integer> candidatos;
+	private Set<Integer> candidatos;
+	private Set<Integer> candidatosUsuario;
 	private boolean defaultValue;
 	private EstadoCasilla estado;
 
@@ -36,7 +37,8 @@ public class Casilla implements ICasillaEstado {
 		region = pRegion;
 		linea = pLinea;
 		columna = pColumna;
-		candidatos = new ArrayList<>();
+		candidatos = new HashSet<>();
+		candidatosUsuario = new HashSet<>();
 		if (pValor != 0) {
 			defaultValue = true;
 		} else {
@@ -72,10 +74,14 @@ public class Casilla implements ICasillaEstado {
 	 * 
 	 * @param pCandidatos
 	 */
-	public void setCandidatos(List<Integer> pCandidatos) {
+	public void setCandidatos(Set<Integer> pCandidatos) {
 		this.candidatos = pCandidatos;
 	}
 
+	public void setCandidatosUsuario(Set<Integer> listaCandidatos) {
+		this.candidatosUsuario = listaCandidatos;
+	}
+	
 	public int getValor() {
 		return valor;
 	}
@@ -107,8 +113,11 @@ public class Casilla implements ICasillaEstado {
 
 	}
 
-	public List<Integer> getCandidatos() {
+	public Set<Integer> getCandidatos() {
 		return candidatos;
 	}
 
+	public Set<Integer> getCandidatosUsuario() {
+		return candidatosUsuario;
+	}
 }
