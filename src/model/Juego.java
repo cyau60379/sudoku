@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
+import model.Cuadricula.Cuadricula;
 import model.Sudoku.ListaSudokus;
 
 public class Juego extends Observable {

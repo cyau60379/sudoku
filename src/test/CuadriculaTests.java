@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import model.Cuadricula;
+import model.Cuadricula.Cuadricula;
 
 class CuadriculaTests {
 
