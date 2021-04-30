@@ -1,4 +1,4 @@
-package model.Estados;
+package model.Casilla;
 
 public class Inicial implements EstadoCasilla {
 
@@ -11,7 +11,7 @@ public class Inicial implements EstadoCasilla {
 	@Override
 	public boolean verificarConActual(int actId, int actValor, int pId, int pValor) {
 		if (actValor == pValor && actId != pId && pValor != 0) {
-			casilla.setEstado(new ProcesadoError(casilla));
+			casilla.setEstado(new Error(casilla));
 			return true;
 		}
 		return false;

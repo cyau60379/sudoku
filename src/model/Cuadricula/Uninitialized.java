@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import model.Casilla;
+import model.Casilla.Casilla;
 
 public class Uninitialized implements EstadoCuadricula {
 

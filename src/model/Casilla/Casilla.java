@@ -1,11 +1,7 @@
-package model;
+package model.Casilla;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import model.Estados.EstadoCasilla;
-import model.Estados.ICasillaEstado;
-import model.Estados.Inicial;
 
 public class Casilla implements ICasillaEstado {
 

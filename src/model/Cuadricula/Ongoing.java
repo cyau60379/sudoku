@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import model.Casilla;
+import model.Casilla.Casilla;
 
 public class Ongoing implements EstadoCuadricula {
 
@@ -46,8 +46,8 @@ public class Ongoing implements EstadoCuadricula {
 	@Override
 	public void comprobarSolucion() {
 		Cuadricula cuadricula = Cuadricula.getCuadricula();
-		cuadricula.getListaCasillas().stream().forEach(p -> cuadricula.comprobarValorCasilla(p));
 		cuadricula.reinicio(cuadricula.getListaCasillas());
+		cuadricula.getListaCasillas().stream().forEach(p -> cuadricula.comprobarValorCasilla(p));
 	}
 
 	@Override

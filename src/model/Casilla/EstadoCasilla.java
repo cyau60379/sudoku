@@ -1,4 +1,4 @@
-package model.Estados;
+package model.Casilla;
 
 public interface EstadoCasilla {
 	
