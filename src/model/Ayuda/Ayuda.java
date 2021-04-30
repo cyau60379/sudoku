@@ -26,6 +26,6 @@ public class Ayuda {
 				return ma.getClass().getSimpleName() + " used";
 			}
 		}
-		return null;
+		return "Impossible to apply help here";
 	}
 }
