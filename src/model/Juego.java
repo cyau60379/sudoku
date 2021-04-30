@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
+import model.Ayuda.Ayuda;
 import model.Cuadricula.Cuadricula;
 import model.Sudoku.ListaSudokus;
 
@@ -46,7 +47,6 @@ public class Juego extends Observable {
 	 * @param pCanditatos
 	 */
 	public void updateCandidatos(int pCasilla, Set<Integer> listaCandidatos) {
-		// TODO - implement Juego.updateCandidatos
 		Cuadricula.getCuadricula().updateCandidatos(pCasilla, listaCandidatos);
 		setChanged();
 		notifyObservers();
@@ -104,4 +104,10 @@ public class Juego extends Observable {
 		return Cuadricula.getCuadricula().getCandidatos();
 	}
 
+	public String getAyuda() {
+		String message = Ayuda.getAyuda().aplicarAyuda();
+		setChanged();
+		notifyObservers();
+		return message;
+	}
 }
