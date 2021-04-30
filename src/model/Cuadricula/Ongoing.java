@@ -10,9 +10,14 @@ import model.Casilla.Casilla;
 public class Ongoing implements EstadoCuadricula {
 
 	@Override
-	public void init(String pId, List<Integer> pSudoku) {
+	public void init() {
+		Cuadricula.getCuadricula().setEstado(new EstadoInitial());
 	}
 
+	@Override
+	public void begin(String pId, List<Integer> pSudoku) {
+	}
+	
 	@Override
 	public boolean updateCasilla(int pCasilla, int pValor) {
 		try {
@@ -102,10 +107,15 @@ public class Ongoing implements EstadoCuadricula {
 	}
 
 	@Override
-	public Map<Integer, Set<Integer>> getCandidatos() {
+	public Map<Integer, Set<Integer>> getCandidatosUsuario() {
 		return Cuadricula.getCuadricula().getListaCasillas().stream().collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatosUsuario));
 	}
 
+	@Override
+	public Map<Integer, Set<Integer>> getCandidatos() {
+		return Cuadricula.getCuadricula().getListaCasillas().stream().collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatos));
+	}
+	
 	@Override
 	public Map<Integer, Set<Integer>> getCandidatosRegion(int pRegion) {
 		return Cuadricula.getCuadricula().getListaCasillas().stream()

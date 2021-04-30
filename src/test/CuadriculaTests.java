@@ -24,7 +24,7 @@ class CuadriculaTests {
 			myNumbers.add(34);
 			myNumbers.add(8);
 			myNumbers.add(12);
-			Cuadricula.getCuadricula().init("", myNumbers);
+			Cuadricula.getCuadricula().begin("", myNumbers);
 			fail("Must have 81 values");
 		} catch (IllegalArgumentException e) {
 
@@ -38,7 +38,7 @@ class CuadriculaTests {
 			for (int i = 0; i < 81; i++) {
 				myNumbers.add(0);
 			}
-			Cuadricula.getCuadricula().init("", myNumbers);
+			Cuadricula.getCuadricula().begin("", myNumbers);
 		} catch (IllegalArgumentException e) {
 			fail("Must accept 0 as a value");
 		}
@@ -50,7 +50,7 @@ class CuadriculaTests {
 		for (int i = 0; i < 81; i++) {
 			myNumbers.add(0);
 		}
-		Cuadricula.getCuadricula().init("", myNumbers);
+		Cuadricula.getCuadricula().begin("", myNumbers);
 		assertTrue(Cuadricula.getCuadricula().updateCasilla(0, 1));
 	}
 	
@@ -60,7 +60,7 @@ class CuadriculaTests {
 		for (int i = 0; i < 81; i++) {
 			myNumbers.add(0);
 		}
-		Cuadricula.getCuadricula().init("", myNumbers);
+		Cuadricula.getCuadricula().begin("", myNumbers);
 		assertFalse(Cuadricula.getCuadricula().updateCasilla(0, 99));
 	}
 
@@ -70,7 +70,7 @@ class CuadriculaTests {
 		for (int i = 0; i < 81; i++) {
 			myNumbers.add(0);
 		}
-		Cuadricula.getCuadricula().init("", myNumbers);
+		Cuadricula.getCuadricula().begin("", myNumbers);
 		assertFalse(Cuadricula.getCuadricula().updateCasilla(99, 0));
 	}
 	
@@ -80,7 +80,7 @@ class CuadriculaTests {
 		for (int i = 0; i < 81; i++) {
 			myNumbers.add(0);
 		}
-		Cuadricula.getCuadricula().init("", myNumbers);
+		Cuadricula.getCuadricula().begin("", myNumbers);
 		assertEquals("Numero de errores: 0\ncolumnas: \nlineas: \nregiones: \n", Cuadricula.getCuadricula().getMensaje());
 	}
 	
@@ -90,7 +90,7 @@ class CuadriculaTests {
 		for (int i = 0; i < 81; i++) {
 			myNumbers.add(0);
 		}
-		Cuadricula.getCuadricula().init("", myNumbers);
+		Cuadricula.getCuadricula().begin("", myNumbers);
 		Cuadricula.getCuadricula().updateCasilla(0, 1);
 		Cuadricula.getCuadricula().updateCasilla(1, 1);
 		Cuadricula.getCuadricula().comprobarSolucion();

@@ -101,7 +101,7 @@ public class ListaSudokus {
 		List<Sudoku> sudokus = listaSudokus.stream().filter(p -> p.getNivel().getValor() == pNivel)
 				.collect(Collectors.toList());
 		Sudoku sudoku = sudokus.get(0); // TODO: change later if there is more that one with the same level
-		Cuadricula.getCuadricula().init(sudoku.getId(), sudoku.getStartCuadricula());
+		Cuadricula.getCuadricula().begin(sudoku.getId(), sudoku.getStartCuadricula());
 	}
 
 }

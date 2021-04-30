@@ -7,9 +7,12 @@ import java.util.Set;
 public class Finished implements EstadoCuadricula {
 
 	@Override
-	public void init(String pId, List<Integer> pSudoku) {
-		// TODO Auto-generated method stub
-		
+	public void init() {
+		Cuadricula.getCuadricula().setEstado(new EstadoInitial());
+	}
+
+	@Override
+	public void begin(String pId, List<Integer> pSudoku) {
 	}
 
 	@Override
@@ -24,12 +27,12 @@ public class Finished implements EstadoCuadricula {
 
 	@Override
 	public void autoUpdateCandidatos(int pCasilla) {
-		
+
 	}
 
 	@Override
 	public void comprobarSolucion() {
-		
+
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class Finished implements EstadoCuadricula {
 	}
 
 	@Override
-	public Map<Integer, Set<Integer>> getCandidatos() {
+	public Map<Integer, Set<Integer>> getCandidatosUsuario() {
 		return null;
 	}
 
@@ -84,6 +87,11 @@ public class Finished implements EstadoCuadricula {
 
 	@Override
 	public Map<Integer, Set<Integer>> getCandidatosColumna(int pColumna) {
+		return null;
+	}
+
+	@Override
+	public Map<Integer, Set<Integer>> getCandidatos() {
 		return null;
 	}
 

@@ -24,6 +24,7 @@ public class Juego extends Observable {
 
 	public void init(String pFicheroJuego) {
 		ListaSudokus.getListaSudokus().init(pFicheroJuego);
+		Cuadricula.getCuadricula().init();
 	}
 
 	public void begin(String pNombre, int pNivel) {
@@ -101,7 +102,7 @@ public class Juego extends Observable {
 	}
 
 	public Map<Integer, Set<Integer>> getCandidatos() {
-		return Cuadricula.getCuadricula().getCandidatos();
+		return Cuadricula.getCuadricula().getCandidatosUsuario();
 	}
 
 	public String getAyuda() {

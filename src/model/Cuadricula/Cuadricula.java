@@ -16,7 +16,7 @@ public class Cuadricula {
 	private EstadoCuadricula estado;
 
 	private Cuadricula() {
-		setEstado(new Uninitialized());
+		setEstado(new EstadoInitial());
 	}
 
 	// getter
@@ -92,8 +92,12 @@ public class Cuadricula {
 		listaCasillas.stream().forEach(p -> p.setCandidatos(calcularCandidatos(p.getId())));
 	}
 
-	public void init(String pId, List<Integer> pSudoku) {
-		estado.init(pId, pSudoku);
+	public void init() {
+		estado.init();
+	}
+
+	public void begin(String pId, List<Integer> pSudoku) {
+		estado.begin(pId, pSudoku);
 	}
 
 	public boolean updateCasilla(int pCasilla, int pValor) {
@@ -108,10 +112,14 @@ public class Cuadricula {
 		return estado.getMensaje();
 	}
 
+	public Map<Integer, Set<Integer>> getCandidatosUsuario() {
+			return estado.getCandidatosUsuario();
+	}
+
 	public Map<Integer, Set<Integer>> getCandidatos() {
 			return estado.getCandidatos();
 	}
-
+	
 	public Map<Integer, Set<Integer>> getCandidatosRegion(int pRegion) {
 			return estado.getCandidatosRegion(pRegion);
 	}

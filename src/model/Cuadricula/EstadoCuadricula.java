@@ -5,7 +5,9 @@ import java.util.Map;
 import java.util.Set;
 
 public interface EstadoCuadricula {
-	public void init(String pId, List<Integer> pSudoku);
+	public void init();
+
+	public void begin(String pId, List<Integer> pSudoku);
 
 	public boolean updateCasilla(int pCasilla, int pValor);
 
@@ -29,12 +31,14 @@ public interface EstadoCuadricula {
 
 	public List<Integer> getRegionesConError();
 
-	public Map<Integer, Set<Integer>> getCandidatos();
+	public Map<Integer, Set<Integer>> getCandidatosUsuario();
 
 	public Map<Integer, Set<Integer>> getCandidatosRegion(int pRegion);
 
 	public Map<Integer, Set<Integer>> getCandidatosLinea(int pLinea);
 
 	public Map<Integer, Set<Integer>> getCandidatosColumna(int pColumna);
+
+	public Map<Integer, Set<Integer>> getCandidatos();
 
 }

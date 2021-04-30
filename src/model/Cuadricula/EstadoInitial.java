@@ -7,10 +7,14 @@ import java.util.Set;
 
 import model.Casilla.Casilla;
 
-public class Uninitialized implements EstadoCuadricula {
+public class EstadoInitial implements EstadoCuadricula {
 
 	@Override
-	public void init(String pId, List<Integer> pSudoku) {
+	public void init() {
+	}
+
+	@Override
+	public void begin(String pId, List<Integer> pSudoku) {
 		Cuadricula.getCuadricula().setIdPartida(pId);
 		List<Casilla> listaCasillas = new ArrayList<>();
 		if (pSudoku.size() != 81) {
@@ -86,7 +90,7 @@ public class Uninitialized implements EstadoCuadricula {
 	}
 
 	@Override
-	public Map<Integer, Set<Integer>> getCandidatos() {
+	public Map<Integer, Set<Integer>> getCandidatosUsuario() {
 		return null;
 	}
 
@@ -102,6 +106,11 @@ public class Uninitialized implements EstadoCuadricula {
 
 	@Override
 	public Map<Integer, Set<Integer>> getCandidatosColumna(int pColumna) {
+		return null;
+	}
+
+	@Override
+	public Map<Integer, Set<Integer>> getCandidatos() {
 		return null;
 	}
 
