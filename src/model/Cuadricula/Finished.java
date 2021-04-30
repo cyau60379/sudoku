@@ -72,4 +72,19 @@ public class Finished implements EstadoCuadricula {
 		return null;
 	}
 
+	@Override
+	public Map<Integer, Set<Integer>> getCandidatosRegion(int pRegion) {
+		return null;
+	}
+
+	@Override
+	public Map<Integer, Set<Integer>> getCandidatosLinea(int pLinea) {
+		return null;
+	}
+
+	@Override
+	public Map<Integer, Set<Integer>> getCandidatosColumna(int pColumna) {
+		return null;
+	}
+
 }

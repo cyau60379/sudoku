@@ -70,17 +70,19 @@ public class Cuadricula {
 
 	protected Set<Integer> calcularCandidatos(int pCasilla) {
 		Casilla casilla = listaCasillas.get(pCasilla);
-		List<Integer> columnas = listaCasillas.stream().filter(p -> p.getColumna() == casilla.getColumna())
-				.map(Casilla::getValor).collect(Collectors.toList());
-		List<Integer> lineas = listaCasillas.stream().filter(p -> p.getLinea() == casilla.getLinea())
-				.map(Casilla::getValor).collect(Collectors.toList());
-		List<Integer> regiones = listaCasillas.stream().filter(p -> p.getRegion() == casilla.getRegion())
-				.map(Casilla::getValor).collect(Collectors.toList());
 		Set<Integer> candidatos = new HashSet<Integer>();
+		if (!casilla.getDefaultValue() && casilla.getValor() == 0) {
+			List<Integer> columnas = listaCasillas.stream().filter(p -> p.getColumna() == casilla.getColumna())
+					.map(Casilla::getValor).collect(Collectors.toList());
+			List<Integer> lineas = listaCasillas.stream().filter(p -> p.getLinea() == casilla.getLinea())
+					.map(Casilla::getValor).collect(Collectors.toList());
+			List<Integer> regiones = listaCasillas.stream().filter(p -> p.getRegion() == casilla.getRegion())
+					.map(Casilla::getValor).collect(Collectors.toList());
 
-		for (int i = 1; i < 10; i++) {
-			if (!columnas.contains(i) && !lineas.contains(i) && !regiones.contains(i)) {
-				candidatos.add(i);
+			for (int i = 1; i < 10; i++) {
+				if (!columnas.contains(i) && !lineas.contains(i) && !regiones.contains(i)) {
+					candidatos.add(i);
+				}
 			}
 		}
 		return candidatos;
@@ -110,6 +112,17 @@ public class Cuadricula {
 			return estado.getCandidatos();
 	}
 
+	public Map<Integer, Set<Integer>> getCandidatosRegion(int pRegion) {
+			return estado.getCandidatosRegion(pRegion);
+	}
+	
+	public Map<Integer, Set<Integer>> getCandidatosLinea(int pLinea) {
+			return estado.getCandidatosLinea(pLinea);
+	}
+	
+	public Map<Integer, Set<Integer>> getCandidatosColumna(int pColumna) {
+		return estado.getCandidatosColumna(pColumna);
+	}
 	/**
 	 * 
 	 * @param pCasilla

@@ -31,4 +31,10 @@ public interface EstadoCuadricula {
 
 	public Map<Integer, Set<Integer>> getCandidatos();
 
+	public Map<Integer, Set<Integer>> getCandidatosRegion(int pRegion);
+
+	public Map<Integer, Set<Integer>> getCandidatosLinea(int pLinea);
+
+	public Map<Integer, Set<Integer>> getCandidatosColumna(int pColumna);
+
 }
