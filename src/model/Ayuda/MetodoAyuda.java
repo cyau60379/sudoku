@@ -1,6 +1,8 @@
 package model.Ayuda;
 
+import java.util.List;
+
 public interface MetodoAyuda {
 
-	public boolean ayudar();
+	public List<Integer> ayudar();
 }

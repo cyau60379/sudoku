@@ -22,10 +22,16 @@ public class Ayuda {
 	
 	public String aplicarAyuda() {
 		for (MetodoAyuda ma : listaMetodos) {
-			if (ma.ayudar()) {
-				return ma.getClass().getSimpleName() + " used";
+			List<Integer> casillaValues = ma.ayudar();
+			if (casillaValues != null) {
+				String message = ma.getClass().getSimpleName() + " utilizado" 
+			+ "\nValor: " + casillaValues.get(0) 
+			+ "\nColumna: " + casillaValues.get(1)
+			+ "\nLinea: " + casillaValues.get(2)
+			+ "\nRegion: " + casillaValues.get(3);
+				return message;
 			}
 		}
-		return "Impossible to apply help here";
+		return "Imposible de aplicar ayuda aqui";
 	}
 }

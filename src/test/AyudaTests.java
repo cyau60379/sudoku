@@ -37,12 +37,41 @@ class AyudaTests {
 			0, 0, 0, 0, 0, 0, 0, 0, 0
 			};
 	
+	Integer sudokuTestNoHelp[] = new Integer[] {
+			0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 6, 0, 0, 0,
+			0, 0, 0, 4, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 8, 0, 0, 0, 0,
+			2, 0, 9, 0, 0, 0, 0, 0, 7,
+			0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 3, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0
+			};
+	
+	@Test
+	void noHelpPossible() {
+		List<Integer> sudoku = Arrays.asList(sudokuTestNoHelp);
+		Cuadricula.getCuadricula().init();
+		Cuadricula.getCuadricula().begin("", sudoku);
+		assertEquals("Imposible de aplicar ayuda aqui", Ayuda.getAyuda().aplicarAyuda());
+	}
+	
+	@Test
+	void noHelpPossible_ShouldNotUpdate() {
+		List<Integer> sudoku = Arrays.asList(sudokuTestNoHelp);
+		Cuadricula.getCuadricula().init();
+		Cuadricula.getCuadricula().begin("", sudoku);
+		Ayuda.getAyuda().aplicarAyuda();
+		assertTrue(sudoku.toString().equals(Cuadricula.getCuadricula().getValores().values().toString()));
+	}	
+	
 	@Test
 	void aplicarAyudaSoleCandidateRightMessage() {
 		List<Integer> sudoku = Arrays.asList(sudokuTestSole);
 		Cuadricula.getCuadricula().init();
 		Cuadricula.getCuadricula().begin("", sudoku);
-		assertEquals("SoleCandidate used", Ayuda.getAyuda().aplicarAyuda());
+		assertEquals("SoleCandidate utilizado\nValor: 5\nColumna: 5\nLinea: 5\nRegion: 4", Ayuda.getAyuda().aplicarAyuda());
 	}
 
 	@Test
@@ -60,7 +89,7 @@ class AyudaTests {
 		List<Integer> sudoku = Arrays.asList(sudokuTestUnique);
 		Cuadricula.getCuadricula().init();
 		Cuadricula.getCuadricula().begin("", sudoku);
-		assertEquals("UniqueCandidate used", Ayuda.getAyuda().aplicarAyuda());
+		assertEquals("UniqueCandidate utilizado\nValor: 4\nColumna: 0\nLinea: 1\nRegion: 0", Ayuda.getAyuda().aplicarAyuda());
 	}
 
 	@Test

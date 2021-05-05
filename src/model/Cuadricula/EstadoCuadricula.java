@@ -9,7 +9,7 @@ public interface EstadoCuadricula {
 
 	public void begin(String pId, List<Integer> pSudoku);
 
-	public boolean updateCasilla(int pCasilla, int pValor);
+	public List<Integer> updateCasilla(int pCasilla, int pValor);
 
 	public boolean updateCandidatos(int pCasilla, Set<Integer> pCandidatos);
 

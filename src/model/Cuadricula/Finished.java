@@ -16,8 +16,8 @@ public class Finished implements EstadoCuadricula {
 	}
 
 	@Override
-	public boolean updateCasilla(int pCasilla, int pValor) {
-		return false;
+	public List<Integer> updateCasilla(int pCasilla, int pValor) {
+		return null;
 	}
 
 	@Override

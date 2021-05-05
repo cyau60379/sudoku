@@ -1,5 +1,6 @@
 package model.Cuadricula;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,14 +20,14 @@ public class Ongoing implements EstadoCuadricula {
 	}
 	
 	@Override
-	public boolean updateCasilla(int pCasilla, int pValor) {
+	public List<Integer> updateCasilla(int pCasilla, int pValor) {
 		try {
 			Casilla c = Cuadricula.getCuadricula().getListaCasillas().get(pCasilla);
 			c.setValor(pValor);
 			Cuadricula.getCuadricula().calcularTodosLosCandidatos();
-			return true;
+			return Arrays.asList(c.getValor(), c.getColumna(), c.getLinea(), c.getRegion());
 		} catch (Exception e) {
-			return false;
+			return null;
 		}
 	}
 

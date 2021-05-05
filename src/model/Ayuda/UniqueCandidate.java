@@ -10,17 +10,18 @@ import model.Cuadricula.Cuadricula;
 public class UniqueCandidate implements MetodoAyuda {
 
 	@Override
-	public boolean ayudar() {
+	public List<Integer> ayudar() {
 		String[] locations = {"region", "line", "column"};
 		for (String location : locations) {
-			if (verify(location)) {
-				return true;
+			List<Integer> list = verify(location);
+			if (list != null) {
+				return list;
 			}
 		}
-		return false;
+		return null;
 	}
 	
-	private boolean verify(String pLocation) {
+	private List<Integer> verify(String pLocation) {
 		// loop on the nine regions of the table
 		for (int i = 0; i < 9; i++) {
 			// map containing the values from 1 to 9 and a list of the square which could contain it
@@ -54,12 +55,11 @@ public class UniqueCandidate implements MetodoAyuda {
 			// update the first square which respect the unique candidate condition
 			for (int value : possibleValues.keySet()) {
 				if (possibleValues.get(value).size() == 1) {
-					Cuadricula.getCuadricula().updateCasilla(possibleValues.get(value).get(0), value);
-					return true;
+					return Cuadricula.getCuadricula().updateCasilla(possibleValues.get(value).get(0), value);
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 
 }

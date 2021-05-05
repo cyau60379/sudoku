@@ -98,10 +98,15 @@ public class ListaSudokus {
 	}
 
 	public void begin(int pNivel) {
-		List<Sudoku> sudokus = listaSudokus.stream().filter(p -> p.getNivel().getValor() == pNivel)
-				.collect(Collectors.toList());
-		Sudoku sudoku = sudokus.get(0); // TODO: change later if there is more that one with the same level
-		Cuadricula.getCuadricula().begin(sudoku.getId(), sudoku.getStartCuadricula());
+		try {
+			List<Sudoku> sudokus = listaSudokus.stream().filter(p -> p.getNivel().getValor() == pNivel)
+					.collect(Collectors.toList());
+			Sudoku sudoku = sudokus.get(0); // TODO: change later if there is more that one with the same level
+			Cuadricula.getCuadricula().begin(sudoku.getId(), sudoku.getStartCuadricula());	
+		} catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
+			System.out.println("Wrong Level");
+		}
 	}
 
 }

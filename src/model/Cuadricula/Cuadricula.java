@@ -100,7 +100,7 @@ public class Cuadricula {
 		estado.begin(pId, pSudoku);
 	}
 
-	public boolean updateCasilla(int pCasilla, int pValor) {
+	public List<Integer> updateCasilla(int pCasilla, int pValor) {
 		return estado.updateCasilla(pCasilla, pValor);
 	}
 	
