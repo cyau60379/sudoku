@@ -17,9 +17,9 @@ public class Ongoing implements EstadoCuadricula {
 	}
 
 	@Override
-	public void begin(String pId, Nivel nivel,List<Integer> pSudoku) {
+	public void begin(String pId, Nivel nivel, List<Integer> pSudoku) {
 	}
-	
+
 	@Override
 	public List<Integer> updateCasilla(int pCasilla, int pValor) {
 		try {
@@ -49,33 +49,35 @@ public class Ongoing implements EstadoCuadricula {
 		Casilla casilla = Cuadricula.getCuadricula().getListaCasillas().get(pCasilla);
 		casilla.setCandidatosUsuario(Cuadricula.getCuadricula().calcularCandidatos(pCasilla));
 	}
-	
 
 	@Override
 	public void comprobarSolucion() {
 		Cuadricula cuadricula = Cuadricula.getCuadricula();
 		cuadricula.reinicio(cuadricula.getListaCasillas());
 		cuadricula.getListaCasillas().stream().forEach(p -> cuadricula.comprobarValorCasilla(p));
-		if(!getTieneError().containsValue(true) && !getValores().containsValue(0) ) {
-			long endTime=System.currentTimeMillis();
+		if (!getTieneError().containsValue(true) && !getValores().containsValue(0)) {
+			long endTime = System.currentTimeMillis();
 			Cuadricula.getCuadricula().setTiempoFinalizado(endTime);
-			Cuadricula.getCuadricula().setEstado( new Finished());
+			Cuadricula.getCuadricula().setEstado(new Finished());
 		}
 	}
 
 	@Override
 	public Map<Integer, Integer> getValores() {
-		return Cuadricula.getCuadricula().getListaCasillas().stream().collect(Collectors.toMap(Casilla::getId, Casilla::getValor));
+		return Cuadricula.getCuadricula().getListaCasillas().stream()
+				.collect(Collectors.toMap(Casilla::getId, Casilla::getValor));
 	}
 
 	@Override
 	public Map<Integer, Boolean> getDefaultValues() {
-		return Cuadricula.getCuadricula().getListaCasillas().stream().collect(Collectors.toMap(Casilla::getId, Casilla::getDefaultValue));
+		return Cuadricula.getCuadricula().getListaCasillas().stream()
+				.collect(Collectors.toMap(Casilla::getId, Casilla::getDefaultValue));
 	}
 
 	@Override
 	public Map<Integer, Boolean> getTieneError() {
-		return Cuadricula.getCuadricula().getListaCasillas().stream().collect(Collectors.toMap(Casilla::getId, Casilla::getTieneError));
+		return Cuadricula.getCuadricula().getListaCasillas().stream()
+				.collect(Collectors.toMap(Casilla::getId, Casilla::getTieneError));
 	}
 
 	@Override
@@ -101,45 +103,50 @@ public class Ongoing implements EstadoCuadricula {
 
 	@Override
 	public List<Integer> getLineasConError() {
-		return Cuadricula.getCuadricula().getErrors().stream().map(Casilla::getLinea).distinct().collect(Collectors.toList());
+		return Cuadricula.getCuadricula().getErrors().stream().map(Casilla::getLinea).distinct()
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Integer> getColumnasConError() {
-		return Cuadricula.getCuadricula().getErrors().stream().map(Casilla::getColumna).distinct().collect(Collectors.toList());
+		return Cuadricula.getCuadricula().getErrors().stream().map(Casilla::getColumna).distinct()
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Integer> getRegionesConError() {
-		return Cuadricula.getCuadricula().getErrors().stream().map(Casilla::getRegion).distinct().collect(Collectors.toList());
+		return Cuadricula.getCuadricula().getErrors().stream().map(Casilla::getRegion).distinct()
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public Map<Integer, Set<Integer>> getCandidatosUsuario() {
-		return Cuadricula.getCuadricula().getListaCasillas().stream().collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatosUsuario));
+		return Cuadricula.getCuadricula().getListaCasillas().stream()
+				.collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatosUsuario));
 	}
 
 	@Override
 	public Map<Integer, Set<Integer>> getCandidatos() {
-		return Cuadricula.getCuadricula().getListaCasillas().stream().collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatos));
+		return Cuadricula.getCuadricula().getListaCasillas().stream()
+				.collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatos));
 	}
-	
+
 	@Override
 	public Map<Integer, Set<Integer>> getCandidatosRegion(int pRegion) {
-		return Cuadricula.getCuadricula().getListaCasillas().stream()
-				.filter(p -> p.getRegion() == pRegion).collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatos));
+		return Cuadricula.getCuadricula().getListaCasillas().stream().filter(p -> p.getRegion() == pRegion)
+				.collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatos));
 	}
 
 	@Override
 	public Map<Integer, Set<Integer>> getCandidatosLinea(int pLinea) {
-		return Cuadricula.getCuadricula().getListaCasillas().stream()
-				.filter(p -> p.getLinea() == pLinea).collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatos));
+		return Cuadricula.getCuadricula().getListaCasillas().stream().filter(p -> p.getLinea() == pLinea)
+				.collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatos));
 	}
 
 	@Override
 	public Map<Integer, Set<Integer>> getCandidatosColumna(int pColumna) {
-		return Cuadricula.getCuadricula().getListaCasillas().stream()
-				.filter(p -> p.getColumna() == pColumna).collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatos));
+		return Cuadricula.getCuadricula().getListaCasillas().stream().filter(p -> p.getColumna() == pColumna)
+				.collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatos));
 	}
 
 }

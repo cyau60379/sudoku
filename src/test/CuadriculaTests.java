@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -182,5 +183,47 @@ class CuadriculaTests {
 		Cuadricula.getCuadricula().updateCasilla(1, 1);
 		Cuadricula.getCuadricula().comprobarSolucion();
 		assertEquals("Numero de errores: 2\ncolumnas: 0 1 \nlineas: 0 \nregiones: 0 \n", Cuadricula.getCuadricula().getMensaje());
+	}
+	
+	@Test
+	void updateCandidatos() {
+		List<Integer> myNumbers = new ArrayList<>();
+		for (int i = 0; i < 81; i++) {
+			myNumbers.add(0);
+		}
+		Cuadricula.getCuadricula().init();
+		Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
+		Set<Integer> set = new HashSet<>();
+		set.add(1);
+		assertTrue(Cuadricula.getCuadricula().updateCandidatos(5, set));
+	}
+	
+	@Test
+	void updateCandidatosWithCadidatesOutOfBound_ShouldRemoveThem() {
+		List<Integer> myNumbers = new ArrayList<>();
+		for (int i = 0; i < 81; i++) {
+			myNumbers.add(0);
+		}
+		Cuadricula.getCuadricula().init();
+		Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
+		Set<Integer> set = new HashSet<>();
+		set.add(99);
+		set.add(87897);
+		set.add(5);
+		Cuadricula.getCuadricula().updateCandidatos(5, set);
+		assertTrue(Cuadricula.getCuadricula().getListaCasillas().get(5).getCandidatos().containsAll(Arrays.asList(5)));
+	}
+	
+	@Test
+	void updateCandidatosWithIndexOutOfBound_ShouldReturnFalse() {
+		List<Integer> myNumbers = new ArrayList<>();
+		for (int i = 0; i < 81; i++) {
+			myNumbers.add(0);
+		}
+		Cuadricula.getCuadricula().init();
+		Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
+		Set<Integer> set = new HashSet<>();
+		set.add(1);
+		assertFalse(Cuadricula.getCuadricula().updateCandidatos(999, set));
 	}
 }
