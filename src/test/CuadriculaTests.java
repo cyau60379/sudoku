@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import model.Nivel;
 import model.Cuadricula.Cuadricula;
 
 class CuadriculaTests {
@@ -105,7 +106,7 @@ class CuadriculaTests {
 			myNumbers.add(8);
 			myNumbers.add(12);
 			Cuadricula.getCuadricula().init();
-			Cuadricula.getCuadricula().begin("", myNumbers);
+			Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
 			fail("Must have 81 values");
 		} catch (IllegalArgumentException e) {
 
@@ -120,7 +121,7 @@ class CuadriculaTests {
 				myNumbers.add(0);
 			}
 			Cuadricula.getCuadricula().init();
-			Cuadricula.getCuadricula().begin("", myNumbers);
+			Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
 		} catch (IllegalArgumentException e) {
 			fail("Must accept 0 as a value");
 		}
@@ -133,7 +134,7 @@ class CuadriculaTests {
 			myNumbers.add(0);
 		}
 		Cuadricula.getCuadricula().init();
-		Cuadricula.getCuadricula().begin("", myNumbers);
+		Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
 		assertTrue(Cuadricula.getCuadricula().updateCasilla(0, 1) != null);
 	}
 	
@@ -144,7 +145,7 @@ class CuadriculaTests {
 			myNumbers.add(0);
 		}
 		Cuadricula.getCuadricula().init();
-		Cuadricula.getCuadricula().begin("", myNumbers);
+		Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
 		assertFalse(Cuadricula.getCuadricula().updateCasilla(0, 99) != null);
 	}
 
@@ -155,7 +156,7 @@ class CuadriculaTests {
 			myNumbers.add(0);
 		}
 		Cuadricula.getCuadricula().init();
-		Cuadricula.getCuadricula().begin("", myNumbers);
+		Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
 		assertFalse(Cuadricula.getCuadricula().updateCasilla(99, 0) != null);
 	}
 	
@@ -166,7 +167,7 @@ class CuadriculaTests {
 			myNumbers.add(0);
 		}
 		Cuadricula.getCuadricula().init();
-		Cuadricula.getCuadricula().begin("", myNumbers);
+		Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
 		assertEquals("Numero de errores: 0\ncolumnas: \nlineas: \nregiones: \n", Cuadricula.getCuadricula().getMensaje());
 	}
 	
@@ -176,7 +177,7 @@ class CuadriculaTests {
 		for (int i = 0; i < 81; i++) {
 			myNumbers.add(0);
 		}
-		Cuadricula.getCuadricula().begin("", myNumbers);
+		Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
 		Cuadricula.getCuadricula().updateCasilla(0, 1);
 		Cuadricula.getCuadricula().updateCasilla(1, 1);
 		Cuadricula.getCuadricula().comprobarSolucion();

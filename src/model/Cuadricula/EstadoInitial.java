@@ -30,11 +30,11 @@ public class EstadoInitial implements EstadoCuadricula {
 			region = 3 * (linea / 3) + (columna / 3);
 			listaCasillas.add(new Casilla(i, pSudoku.get(i), region, linea, columna));
 		}
-		Cuadricula.getCuadricula().nivel(nivel);
+		Cuadricula.getCuadricula().setNivel(nivel);
 		Cuadricula.getCuadricula().setListaCasillas(listaCasillas);
 		Cuadricula.getCuadricula().calcularTodosLosCandidatos();
 		long startTime=System.currentTimeMillis();
-		Cuadricula.getCuadricula().TiempoInicio(startTime);
+		Cuadricula.getCuadricula().setTiempoInicio(startTime);
 		Cuadricula.getCuadricula().setEstado(new Ongoing());
 	}
 

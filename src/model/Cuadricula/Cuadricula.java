@@ -32,36 +32,38 @@ public class Cuadricula {
 	public List<Casilla> getListaCasillas() {
 		return listaCasillas;
 	}
-	
+
 	protected List<Casilla> getErrors() {
-		return listaCasillas.stream().filter(p -> p.getTieneError() && p.getDefaultValue() == false).collect(Collectors.toList());
+		return listaCasillas.stream().filter(p -> p.getTieneError() && p.getDefaultValue() == false)
+				.collect(Collectors.toList());
 	}
-	
+
 	// setter
 	public void setIdPartida(String pId) {
 		idPartida = pId;
 	}
-	
-	public void nivel(Nivel nivel) {
-		this.nivel=nivel;
+
+	public void setNivel(Nivel nivel) {
+		this.nivel = nivel;
 	}
-	
-	public void TiempoInicio(long startTime) {
-		this.startTime=startTime;
+
+	public void setTiempoInicio(long startTime) {
+		this.startTime = startTime;
 	}
-	public void TiempoFinalizado(long endTime) {
-		this.endTime=endTime;
+
+	public void setTiempoFinalizado(long endTime) {
+		this.endTime = endTime;
 	}
-	
-	public float puntos() {
-		float puntos = (30000*nivel.getValor()/((endTime-startTime)/1000)+(30*Ayuda.getAyuda().getContador()));
+
+	public float calcularPuntos() {
+		float puntos = (30000 * nivel.getValor() / ((endTime - startTime) / 1000) + (30 * Ayuda.getAyuda().getContador()));
 		return puntos;
 	}
-	
+
 	public void setListaCasillas(List<Casilla> pSudoku) {
 		listaCasillas = pSudoku;
 	}
-	
+
 	protected void setEstado(EstadoCuadricula pEstado) {
 		estado = pEstado;
 	}
@@ -124,7 +126,7 @@ public class Cuadricula {
 	public List<Integer> updateCasilla(int pCasilla, int pValor) {
 		return estado.updateCasilla(pCasilla, pValor);
 	}
-	
+
 	public void comprobarSolucion() {
 		estado.comprobarSolucion();
 	}
@@ -134,24 +136,25 @@ public class Cuadricula {
 	}
 
 	public Map<Integer, Set<Integer>> getCandidatosUsuario() {
-			return estado.getCandidatosUsuario();
+		return estado.getCandidatosUsuario();
 	}
 
 	public Map<Integer, Set<Integer>> getCandidatos() {
-			return estado.getCandidatos();
+		return estado.getCandidatos();
 	}
-	
+
 	public Map<Integer, Set<Integer>> getCandidatosRegion(int pRegion) {
-			return estado.getCandidatosRegion(pRegion);
+		return estado.getCandidatosRegion(pRegion);
 	}
-	
+
 	public Map<Integer, Set<Integer>> getCandidatosLinea(int pLinea) {
-			return estado.getCandidatosLinea(pLinea);
+		return estado.getCandidatosLinea(pLinea);
 	}
-	
+
 	public Map<Integer, Set<Integer>> getCandidatosColumna(int pColumna) {
 		return estado.getCandidatosColumna(pColumna);
 	}
+
 	/**
 	 * 
 	 * @param pCasilla
@@ -164,7 +167,7 @@ public class Cuadricula {
 	public void autoUpdateCandidatos(int pCasilla) {
 		estado.autoUpdateCandidatos(pCasilla);
 	}
-	
+
 	public Map<Integer, Integer> getValores() {
 		return estado.getValores();
 	}
