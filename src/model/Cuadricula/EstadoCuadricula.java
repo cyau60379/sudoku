@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import model.Nivel;
+
 public interface EstadoCuadricula {
 	public void init();
 
-	public void begin(String pId, List<Integer> pSudoku);
+	public void begin(String pId,Nivel nivel ,List<Integer> pSudoku);
 
 	public List<Integer> updateCasilla(int pCasilla, int pValor);
 

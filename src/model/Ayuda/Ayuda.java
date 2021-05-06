@@ -3,12 +3,14 @@ package model.Ayuda;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ayuda {
+public class Ayuda { 
+	private int cont;
 	private static Ayuda mAyuda = new Ayuda();
 	private List<MetodoAyuda> listaMetodos;
 
 	// private constructor
 	private Ayuda() {
+		cont=0;
 		listaMetodos = new ArrayList<>();
 		listaMetodos.add(new SoleCandidate());
 		listaMetodos.add(new UniqueCandidate());
@@ -20,7 +22,17 @@ public class Ayuda {
 		return mAyuda;
 	}
 	
+	public int getContador() {
+		return cont;
+	}
+	
+	public void init() {
+		cont=0;
+	}
+
+	
 	public String aplicarAyuda() {
+		cont++;
 		for (MetodoAyuda ma : listaMetodos) {
 			List<Integer> casillaValues = ma.ayudar();
 			if (casillaValues != null) {

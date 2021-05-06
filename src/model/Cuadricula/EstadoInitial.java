@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import model.Nivel;
 import model.Casilla.Casilla;
 
 public class EstadoInitial implements EstadoCuadricula {
@@ -14,7 +15,7 @@ public class EstadoInitial implements EstadoCuadricula {
 	}
 
 	@Override
-	public void begin(String pId, List<Integer> pSudoku) {
+	public void begin(String pId,Nivel nivel ,List<Integer> pSudoku) {
 		Cuadricula.getCuadricula().setIdPartida(pId);
 		List<Casilla> listaCasillas = new ArrayList<>();
 		if (pSudoku.size() != 81) {
@@ -29,8 +30,11 @@ public class EstadoInitial implements EstadoCuadricula {
 			region = 3 * (linea / 3) + (columna / 3);
 			listaCasillas.add(new Casilla(i, pSudoku.get(i), region, linea, columna));
 		}
+		Cuadricula.getCuadricula().nivel(nivel);
 		Cuadricula.getCuadricula().setListaCasillas(listaCasillas);
 		Cuadricula.getCuadricula().calcularTodosLosCandidatos();
+		long startTime=System.currentTimeMillis();
+		Cuadricula.getCuadricula().TiempoInicio(startTime);
 		Cuadricula.getCuadricula().setEstado(new Ongoing());
 	}
 

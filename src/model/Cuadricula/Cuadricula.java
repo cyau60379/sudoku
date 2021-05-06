@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import model.Nivel;
+import model.Ayuda.Ayuda;
 import model.Casilla.Casilla;
 
 public class Cuadricula {
@@ -14,6 +16,9 @@ public class Cuadricula {
 	private List<Casilla> listaCasillas;
 	private String idPartida;
 	private EstadoCuadricula estado;
+	private long startTime;
+	private long endTime;
+	private Nivel nivel;
 
 	private Cuadricula() {
 		setEstado(new EstadoInitial());
@@ -35,6 +40,22 @@ public class Cuadricula {
 	// setter
 	public void setIdPartida(String pId) {
 		idPartida = pId;
+	}
+	
+	public void nivel(Nivel nivel) {
+		this.nivel=nivel;
+	}
+	
+	public void TiempoInicio(long startTime) {
+		this.startTime=startTime;
+	}
+	public void TiempoFinalizado(long endTime) {
+		this.endTime=endTime;
+	}
+	
+	public float puntos() {
+		float puntos = (30000*nivel.getValor()/((endTime-startTime)/1000)+(30*Ayuda.getAyuda().getContador()));
+		return puntos;
 	}
 	
 	public void setListaCasillas(List<Casilla> pSudoku) {
@@ -96,8 +117,8 @@ public class Cuadricula {
 		estado.init();
 	}
 
-	public void begin(String pId, List<Integer> pSudoku) {
-		estado.begin(pId, pSudoku);
+	public void begin(String pId, Nivel nivel, List<Integer> pSudoku) {
+		estado.begin(pId, nivel, pSudoku);
 	}
 
 	public List<Integer> updateCasilla(int pCasilla, int pValor) {

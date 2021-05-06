@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import model.Nivel;
 import model.Casilla.Casilla;
 
 public class Ongoing implements EstadoCuadricula {
@@ -16,7 +17,7 @@ public class Ongoing implements EstadoCuadricula {
 	}
 
 	@Override
-	public void begin(String pId, List<Integer> pSudoku) {
+	public void begin(String pId, Nivel nivel,List<Integer> pSudoku) {
 	}
 	
 	@Override
@@ -48,12 +49,18 @@ public class Ongoing implements EstadoCuadricula {
 		Casilla casilla = Cuadricula.getCuadricula().getListaCasillas().get(pCasilla);
 		casilla.setCandidatosUsuario(Cuadricula.getCuadricula().calcularCandidatos(pCasilla));
 	}
+	
 
 	@Override
 	public void comprobarSolucion() {
 		Cuadricula cuadricula = Cuadricula.getCuadricula();
 		cuadricula.reinicio(cuadricula.getListaCasillas());
 		cuadricula.getListaCasillas().stream().forEach(p -> cuadricula.comprobarValorCasilla(p));
+		if(!getTieneError().containsValue(true) && !getValores().containsValue(0) ) {
+			long endTime=System.currentTimeMillis();
+			Cuadricula.getCuadricula().TiempoFinalizado(endTime);
+			Cuadricula.getCuadricula().setEstado( new Finished());
+		}
 	}
 
 	@Override

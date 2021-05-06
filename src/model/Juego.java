@@ -25,6 +25,7 @@ public class Juego extends Observable {
 	public void init(String pFicheroJuego) {
 		ListaSudokus.getListaSudokus().init(pFicheroJuego);
 		Cuadricula.getCuadricula().init();
+		Ayuda.getAyuda().init();
 	}
 
 	public void begin(String pNombre, int pNivel) {

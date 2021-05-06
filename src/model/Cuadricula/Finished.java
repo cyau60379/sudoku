@@ -4,15 +4,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class Finished implements EstadoCuadricula {
+import model.Nivel;
 
+public class Finished implements EstadoCuadricula {
+	
 	@Override
 	public void init() {
 		Cuadricula.getCuadricula().setEstado(new EstadoInitial());
 	}
 
 	@Override
-	public void begin(String pId, List<Integer> pSudoku) {
+	public void begin(String pId, Nivel nivel,List<Integer> pSudoku) {
 	}
 
 	@Override
