@@ -6,11 +6,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Ranking {
 	private static Ranking ranking;
@@ -21,7 +23,7 @@ public class Ranking {
 		crearFichero();
 		escritorDeFichero();
 		lectorDeFichero();
-		ordenarRanking("Normal");
+		ordenarRanking(0);
 	}
 
 	public static Ranking getRanking() {
@@ -52,10 +54,8 @@ public class Ranking {
 				String[] arr = linea.split(",");
 				Map<String, String> map = new HashMap<String, String>();
 				for (int i = 0; i < atributos.size(); i++) {
-
 					map.put(atributos.get(i), arr[i]);
 				}
-
 				mapList.add(map);
 			}
 			file.close();
@@ -80,47 +80,16 @@ public class Ranking {
 		return Juego.getJuego().cargarDatosRanking();
 	}
 
-	public List<Map<String, String>> ordenarRanking(String nivel) {
-		List<Map<String, String>> listaRanking = new ArrayList<>();
-		mapList.sort(Comparator.comparing(m -> Float.valueOf(m.get("puntos"))));
-		for (int i = mapList.size() - 1; i > 0; i--) {
-			switch (nivel) {
-			case "Todos los niveles":
-				try {
-					listaRanking.add(mapList.get(i));
-				} catch (NullPointerException e2) {
-
-				}
-				break;
-			case "Facil":
-				try {
-					if (mapList.get(i).get("nivel").equals("1")) {
-						listaRanking.add(mapList.get(i));
-					}
-				} catch (NullPointerException e2) {
-
-				}
-				break;
-			case "Normal":
-				try {
-					if (mapList.get(i).get("nivel").equals("2")) {
-						listaRanking.add(mapList.get(i));
-					}
-				} catch (NullPointerException e2) {
-
-				}
-				break;
-			case "Dificil":
-				try {
-					if (mapList.get(i).get("nivel").equals("3")) {
-						listaRanking.add(mapList.get(i));
-					}
-				} catch (NullPointerException e2) {
-
-				}
-				break;
-			}
+	public List<Map<String, String>> ordenarRanking(int pNivel) {
+		if (pNivel == 0) {
+			mapList.sort(Comparator.comparing(m -> Float.valueOf(m.get("puntos"))));
+			Collections.reverse(mapList);
+			return mapList;
 		}
+		List<Map<String, String>> listaRanking = mapList.stream()
+				.filter(p -> Integer.parseInt(p.get("nivel")) == pNivel).collect(Collectors.toList());
+		listaRanking.sort(Comparator.comparing(m -> Float.valueOf(m.get("puntos"))));
+		Collections.reverse(listaRanking);
 		return listaRanking;
 	}
 }

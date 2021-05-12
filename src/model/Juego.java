@@ -116,8 +116,8 @@ public class Juego extends Observable {
 		return message;
 	}
 
-	public void getRanking() {
-		Ranking.getRanking();
+	public List<Map<String, String>> getRanking(int pNivel) {
+		return Ranking.getRanking().ordenarRanking(pNivel);
 	}
 
 	public String cargarDatosRanking() {

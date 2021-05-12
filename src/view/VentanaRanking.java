@@ -12,7 +12,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 import model.Juego;
-import model.Ranking;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -34,11 +33,6 @@ public class VentanaRanking extends JFrame implements Observer {
 
 	private VentanaRanking() {
 		Juego.getJuego().addObserver(this);
-		getContentPane().setBackground(Color.WHITE);
-		setTitle("Ranking");
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(933, 100, 454, 267);
-		setVisible(true);
 		inicializar();
 		update(null, null);
 	}
@@ -46,16 +40,16 @@ public class VentanaRanking extends JFrame implements Observer {
 	public static VentanaRanking getVentanaRanking() {
 		if (ventanaRanking == null) {
 			ventanaRanking = new VentanaRanking();
-			return ventanaRanking;
-		} else {
-			ventanaRanking.setVisible(true);
-			return ventanaRanking;
 		}
-
+		ventanaRanking.setVisible(true);
+		return ventanaRanking;
 	}
 
 	private void inicializar() {
-
+		getContentPane().setBackground(Color.WHITE);
+		setTitle("Ranking");
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setBounds(933, 100, 454, 267);
 		rankingPanel = new JPanel();
 		rankingPanel.setBackground(Color.WHITE);
 
@@ -142,18 +136,22 @@ public class VentanaRanking extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		cargarRanking();
-		mostrarRanking();
-
-	}
-
-	public void cargarRanking() {
-		Juego.getJuego().getRanking();
-	}
-
-	public void mostrarRanking() {
-		List<Map<String, String>> list = Ranking.getRanking().ordenarRanking(nivel);
+		int pNivel = 0;
+		switch(nivel) {
+		case "Facil":
+			pNivel = 1;
+			break;
+		case "Normal":
+			pNivel = 2;
+			break;
+		case "Dificil":
+			pNivel = 3;
+			break;
+		default:
+			pNivel = 0;	
+		}
+		
+		List<Map<String, String>> list = Juego.getJuego().getRanking(pNivel);
 		String text = "";
 		int j = 0;
 		for (int i = 0; i < list.size(); i++) {
@@ -161,15 +159,15 @@ public class VentanaRanking extends JFrame implements Observer {
 				text += list.get(i).toString() + "\n";
 				j++;
 			}
-
 		}
 		textArea2.setText(text);
+
 	}
 
 	private class Controlador implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			nivel = (String) filtro.getSelectedItem();
-			mostrarRanking();
+			update(null, null);
 		}
 
 	}
