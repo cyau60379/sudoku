@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -114,16 +113,18 @@ public class Juego extends Observable {
 		notifyObservers();
 		return message;
 	}
+
 	public void getRanking() {
 		Ranking.getRanking();
 	}
+
 	public String cargarDatosRanking() {
 		// TODO Auto-generated method stub
 		String idPartida = Cuadricula.getCuadricula().getIdPartida();
 		int nivel = Cuadricula.getCuadricula().getNivel().getValor();
 		String nombrePartida = Cuadricula.getCuadricula().getNombrePartida();
 		float puntos = Cuadricula.getCuadricula().calcularPuntos();
-		String st=idPartida+","+nivel+","+nombrePartida+","+puntos;
+		String st = idPartida + "," + nivel + "," + nombrePartida + "," + puntos;
 		return st;
 	}
 }
