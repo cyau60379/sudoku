@@ -19,6 +19,7 @@ public class Cuadricula {
 	private long startTime;
 	private long endTime;
 	private Nivel nivel;
+	private String nombrePartida;
 
 	private Cuadricula() {
 		setEstado(new EstadoInitial());
@@ -45,6 +46,10 @@ public class Cuadricula {
 
 	public void setNivel(Nivel nivel) {
 		this.nivel = nivel;
+	}
+	
+	public void setNombrePartida(String nombre) {
+		this.nombrePartida = nombre;
 	}
 
 	public void setTiempoInicio(long startTime) {
@@ -190,6 +195,19 @@ public class Cuadricula {
 
 	public List<Integer> getRegionesConError() {
 		return estado.getRegionesConError();
+	}
+
+	public Nivel getNivel() {
+		// TODO Auto-generated method stub
+		return nivel;
+	}
+	public String getIdPartida() {
+		return idPartida;
+	}
+
+	public String getNombrePartida() {
+		// TODO Auto-generated method stub
+		return nombrePartida;
 	}
 
 }

@@ -45,7 +45,9 @@ public class Ventana extends JFrame implements Observer {
 	private JButton btnComprobar;
 	private JButton btnCandidatos;
 	private JButton btnCalcularCandidatos;
+	private JButton btnRanking;
 	private JTextPane info;
+	
 	// Grid elements
 	private JPanel cuadricula;
 	private CasillaG currentCasilla;
@@ -83,55 +85,69 @@ public class Ventana extends JFrame implements Observer {
 			});
 
 			GroupLayout gl_panel = new GroupLayout(editor);
-			gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-					.createSequentialGroup().addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
-							.createSequentialGroup().addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-									.addComponent(getLblCandidatos()).addComponent(getLblValor()))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-									.createSequentialGroup()
-									.addComponent(getTextField(), GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED).addComponent(getBtnCandidatos())
-									.addGap(5))
+			gl_panel.setHorizontalGroup(
+				gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_panel.createSequentialGroup()
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+									.addComponent(getLblCandidatos())
+									.addComponent(getLblValor()))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 									.addGroup(gl_panel.createSequentialGroup()
-											.addComponent(getValor(), GroupLayout.PREFERRED_SIZE,
-													GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(getBtnModificar())))
-							.addGap(14))
-							.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
-									.createParallelGroup(Alignment.LEADING, false)
-									.addGroup(gl_panel.createSequentialGroup().addComponent(getBtnComprobar())
-											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
-													Short.MAX_VALUE)
-											.addComponent(getBtnRestablecer()))
-									.addComponent(getInfo(), Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 273,
-											GroupLayout.PREFERRED_SIZE))
-									.addContainerGap())
-							.addGroup(gl_panel.createSequentialGroup().addComponent(getBtnAyuda())
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(getBtnCalcularCandidatos()).addGap(15)))));
-			gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel.createSequentialGroup().addGap(5)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(getLblCandidatos())
-									.addComponent(getTextField(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-											GroupLayout.PREFERRED_SIZE)
-									.addComponent(getBtnCandidatos()))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(getLblValor())
-									.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-											GroupLayout.PREFERRED_SIZE)
-									.addComponent(getBtnModificar()))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(getBtnComprobar())
-									.addComponent(getBtnRestablecer()))
-							.addGap(34)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(getBtnAyuda())
-									.addComponent(getBtnCalcularCandidatos()))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-							.addContainerGap()));
+										.addComponent(getTextField(), GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(getBtnCandidatos())
+										.addGap(5))
+									.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(getBtnModificar())))
+								.addGap(14))
+							.addGroup(gl_panel.createSequentialGroup()
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+									.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(getBtnComprobar())
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(getBtnRestablecer()))
+									.addComponent(getInfo(), Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE))
+								.addContainerGap())
+							.addGroup(gl_panel.createSequentialGroup()
+								.addComponent(getBtnRanking())
+								.addGap(18)
+								.addComponent(getBtnAyuda())
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(getBtnCalcularCandidatos())
+								.addGap(15))))
+			);
+			gl_panel.setVerticalGroup(
+				gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createSequentialGroup()
+						.addGap(5)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getLblCandidatos())
+							.addComponent(getTextField(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(getBtnCandidatos()))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getLblValor())
+							.addComponent(getValor(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(getBtnModificar()))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getBtnComprobar())
+							.addComponent(getBtnRestablecer()))
+						.addGap(34)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(getBtnAyuda())
+							.addComponent(getBtnCalcularCandidatos())
+							.addComponent(getBtnRanking()))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(getInfo(), GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+						.addContainerGap())
+			);
 			editor.setLayout(gl_panel);
 		}
 		return editor;
@@ -173,6 +189,14 @@ public class Ventana extends JFrame implements Observer {
 			btnCandidatos.addActionListener(getControlador());
 		}
 		return btnCandidatos;
+	}
+	
+	private JButton getBtnRanking() {
+		if (btnRanking == null) {
+			btnRanking = new JButton("Ranking");
+			btnRanking.addActionListener(getControlador());
+		}
+		return btnRanking;
 	}
 
 	private JButton getBtnModificar() {
@@ -350,6 +374,12 @@ public class Ventana extends JFrame implements Observer {
 				case "Ayuda":
 					try {
 						getInfo().setText(Juego.getJuego().getAyuda());
+					} catch (NullPointerException e2) {
+					}
+					break;
+				case "Ranking":
+					try {
+						VentanaRanking.getVentanaRanking();
 					} catch (NullPointerException e2) {
 					}
 				default:
