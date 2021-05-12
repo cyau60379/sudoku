@@ -40,14 +40,13 @@ public class VentanaRanking extends JFrame implements Observer{
 	
 	private VentanaRanking() {
 		Juego.getJuego().addObserver(this);
-		update(null, null);
 		getContentPane().setBackground(Color.WHITE);
 		setTitle("Ranking");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(933, 100, 454, 267);
 		setVisible(true);
 		inicializar();
-		mostrarRanking();
+		update(null, null);
 	}
 	
 	public static VentanaRanking getVentanaRanking() {
@@ -153,6 +152,7 @@ public class VentanaRanking extends JFrame implements Observer{
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		cargarRanking();
+		mostrarRanking();
 		
 	}
 	
