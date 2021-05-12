@@ -353,9 +353,13 @@ public class Ventana extends JFrame implements Observer {
 				case "Comprobar":
 					try {
 						Juego.getJuego().comprobarSolucion();
+						if (Juego.getJuego().isFinished()) {
+							VentanaRanking.getVentanaRanking();
+						}
 						String mensaje = Juego.getJuego().getMensaje();
 						getInfo().setText(mensaje);
 					} catch (NullPointerException e2) {
+						e2.printStackTrace();
 					}
 					break;
 				case "Cambiar":

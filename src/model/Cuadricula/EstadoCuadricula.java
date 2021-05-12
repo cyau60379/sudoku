@@ -43,4 +43,6 @@ public interface EstadoCuadricula {
 
 	public Map<Integer, Set<Integer>> getCandidatos();
 
+	public boolean isFinished();
+
 }

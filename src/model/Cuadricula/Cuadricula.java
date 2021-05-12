@@ -196,6 +196,10 @@ public class Cuadricula {
 	public List<Integer> getRegionesConError() {
 		return estado.getRegionesConError();
 	}
+	
+	public boolean isFinished() {
+		return estado.isFinished();
+	}
 
 	public Nivel getNivel() {
 		// TODO Auto-generated method stub

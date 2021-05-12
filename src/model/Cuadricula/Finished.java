@@ -97,4 +97,9 @@ public class Finished implements EstadoCuadricula {
 		return null;
 	}
 
+	@Override
+	public boolean isFinished() {
+		return true;
+	}
+
 }

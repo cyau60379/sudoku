@@ -91,8 +91,10 @@ public class Juego extends Observable {
 
 	public void comprobarSolucion() {
 		Cuadricula.getCuadricula().comprobarSolucion();
-		setChanged();
-		notifyObservers();
+		if (!isFinished()) {
+			setChanged();
+			notifyObservers();
+		}
 	}
 
 	public List<Integer> getNiveles() {
@@ -126,5 +128,9 @@ public class Juego extends Observable {
 		float puntos = Cuadricula.getCuadricula().calcularPuntos();
 		String st = idPartida + "," + nivel + "," + nombrePartida + "," + puntos;
 		return st;
+	}
+
+	public boolean isFinished() {
+		return Cuadricula.getCuadricula().isFinished();
 	}
 }

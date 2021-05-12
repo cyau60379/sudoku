@@ -118,4 +118,9 @@ public class EstadoInitial implements EstadoCuadricula {
 		return null;
 	}
 
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
+
 }

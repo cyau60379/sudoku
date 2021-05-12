@@ -149,4 +149,9 @@ public class Ongoing implements EstadoCuadricula {
 				.collect(Collectors.toMap(Casilla::getId, Casilla::getCandidatos));
 	}
 
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
+
 }
