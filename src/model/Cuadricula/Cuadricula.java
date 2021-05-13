@@ -213,5 +213,9 @@ public class Cuadricula {
 		// TODO Auto-generated method stub
 		return nombrePartida;
 	}
+	
+	public void finish() {
+		estado.finish();
+	}
 
 }

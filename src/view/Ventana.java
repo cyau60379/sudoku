@@ -334,6 +334,11 @@ public class Ventana extends JFrame implements Observer {
 					try {
 						Juego.getJuego().updateCasilla(currentCasilla.getId(),
 								Integer.parseInt(valor.getValue().toString()));
+						String mensaje = Juego.getJuego().getMensaje();
+						getInfo().setText(mensaje);
+						if (Juego.getJuego().isFinished()) {
+							VentanaRanking.getVentanaRanking();
+						}
 					} catch (NullPointerException e2) {
 					}
 					break;
@@ -378,6 +383,11 @@ public class Ventana extends JFrame implements Observer {
 				case "Ayuda":
 					try {
 						getInfo().setText(Juego.getJuego().getAyuda());
+						if (Juego.getJuego().isFinished()) {
+							String mensaje = Juego.getJuego().getMensaje();
+							getInfo().setText(mensaje);
+							VentanaRanking.getVentanaRanking();
+						}
 					} catch (NullPointerException e2) {
 					}
 					break;

@@ -102,4 +102,10 @@ public class Finished implements EstadoCuadricula {
 		return true;
 	}
 
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -42,6 +42,7 @@ public class Juego extends Observable {
 		Cuadricula.getCuadricula().updateCasilla(pCasilla, pValor);
 		setChanged();
 		notifyObservers();
+		comprobarSolucion();
 	}
 
 	/**
@@ -113,6 +114,7 @@ public class Juego extends Observable {
 		String message = Ayuda.getAyuda().aplicarAyuda();
 		setChanged();
 		notifyObservers();
+		Cuadricula.getCuadricula().finish();
 		return message;
 	}
 

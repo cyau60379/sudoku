@@ -45,4 +45,6 @@ public interface EstadoCuadricula {
 
 	public boolean isFinished();
 
+	public void finish();
+
 }

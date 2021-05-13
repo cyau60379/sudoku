@@ -123,4 +123,10 @@ public class EstadoInitial implements EstadoCuadricula {
 		return false;
 	}
 
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

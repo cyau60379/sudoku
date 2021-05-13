@@ -55,6 +55,10 @@ public class Ongoing implements EstadoCuadricula {
 		Cuadricula cuadricula = Cuadricula.getCuadricula();
 		cuadricula.reinicio(cuadricula.getListaCasillas());
 		cuadricula.getListaCasillas().stream().forEach(p -> cuadricula.comprobarValorCasilla(p));
+		finish();
+	}
+
+	public void finish() {
 		if (!getTieneError().containsValue(true) && !getValores().containsValue(0)) {
 			long endTime = System.currentTimeMillis();
 			Cuadricula.getCuadricula().setTiempoFinalizado(endTime);
