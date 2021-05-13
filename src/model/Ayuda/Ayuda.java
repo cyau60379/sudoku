@@ -3,6 +3,8 @@ package model.Ayuda;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Logger;
+
 public class Ayuda {
 	private int cont;
 	private static Ayuda mAyuda = new Ayuda();
@@ -32,15 +34,19 @@ public class Ayuda {
 
 	public String aplicarAyuda() {
 		cont++;
+		String message;
 		for (MetodoAyuda ma : listaMetodos) {
 			List<Integer> casillaValues = ma.ayudar();
 			if (casillaValues != null) {
-				String message = ma.getClass().getSimpleName() + " utilizado" + "\nValor: " + casillaValues.get(0)
+				message = ma.getClass().getSimpleName() + " utilizado" + "\nValor: " + casillaValues.get(0)
 						+ "\nColumna: " + casillaValues.get(1) + "\nLinea: " + casillaValues.get(2) + "\nRegion: "
 						+ casillaValues.get(3);
+				Logger.getLogger().write("[HELP] " + message.replaceAll("\n", " "));
 				return message;
 			}
 		}
-		return "Imposible de aplicar ayuda aqui";
+		message = "Imposible de aplicar ayuda aqui";
+		Logger.getLogger().write(message.replaceAll("\n", " "));
+		return message;
 	}
 }

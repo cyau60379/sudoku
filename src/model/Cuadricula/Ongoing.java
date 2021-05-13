@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import model.Logger;
 import model.Nivel;
 import model.Casilla.Casilla;
 
@@ -38,6 +39,7 @@ public class Ongoing implements EstadoCuadricula {
 			Casilla casilla = Cuadricula.getCuadricula().getListaCasillas().get(pCasilla);
 			pCandidatos = pCandidatos.stream().filter(p -> p > 0 && p < 10).collect(Collectors.toSet());
 			casilla.setCandidatosUsuario(pCandidatos);
+			Logger.getLogger().write("[GAMER MOVE] Actualizacion candidatos casilla " + pCasilla + ": " + pCandidatos.toString());
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -47,7 +49,9 @@ public class Ongoing implements EstadoCuadricula {
 	@Override
 	public void autoUpdateCandidatos(int pCasilla) {
 		Casilla casilla = Cuadricula.getCuadricula().getListaCasillas().get(pCasilla);
-		casilla.setCandidatosUsuario(Cuadricula.getCuadricula().calcularCandidatos(pCasilla));
+		Set<Integer> pCandidatos = Cuadricula.getCuadricula().calcularCandidatos(pCasilla);
+		casilla.setCandidatosUsuario(pCandidatos);
+		Logger.getLogger().write("[GAMER MOVE] Actualizacion candidatos casilla " + pCasilla + ": " + pCandidatos.toString());
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import model.Logger;
 import model.Cuadricula.Cuadricula;
 
 public class ListaSudokus {
@@ -42,7 +43,8 @@ public class ListaSudokus {
 					if (id != "" && dificulty != 0 && sudoku != "") {
 						List<Integer> startCuadricula = convertStringToList(sudoku.substring(0, sudoku.length() / 2));
 						List<Integer> solucion = convertStringToList(sudoku.substring(sudoku.length() / 2));
-						Sudoku newSudoku = SudokuFactory.getSudokuFactory().createSudoku(id, dificulty, startCuadricula, solucion);
+						Sudoku newSudoku = SudokuFactory.getSudokuFactory().createSudoku(id, dificulty, startCuadricula,
+								solucion);
 						listaSudokus.add(newSudoku);
 						// initialize the next sudoku
 						id = line;
@@ -102,7 +104,8 @@ public class ListaSudokus {
 			List<Sudoku> sudokus = listaSudokus.stream().filter(p -> p.getNivel().getValor() == pNivel)
 					.collect(Collectors.toList());
 			Sudoku sudoku = sudokus.get(0); // TODO: change later if there is more that one with the same level
-			Cuadricula.getCuadricula().begin(sudoku.getId(),sudoku.getNivel() ,sudoku.getStartCuadricula());	
+			Cuadricula.getCuadricula().begin(sudoku.getId(), sudoku.getNivel(), sudoku.getStartCuadricula());
+			Logger.getLogger().write("Start Game " + sudoku.getId() + " [Level:" + pNivel + "]");
 		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
 			System.out.println("Wrong Level");

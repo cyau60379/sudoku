@@ -39,7 +39,10 @@ public class Juego extends Observable {
 	 * @param pValor
 	 */
 	public void updateCasilla(int pCasilla, int pValor) {
-		Cuadricula.getCuadricula().updateCasilla(pCasilla, pValor);
+		List<Integer> casilla = Cuadricula.getCuadricula().updateCasilla(pCasilla, pValor);
+		if (casilla != null) {
+			Logger.getLogger().write("[GAMER MOVE] Actualizacion valor casilla " + pCasilla + ": " + casilla.get(0));
+		}
 		setChanged();
 		notifyObservers();
 		comprobarSolucion();
@@ -129,6 +132,7 @@ public class Juego extends Observable {
 		String nombrePartida = Cuadricula.getCuadricula().getNombrePartida();
 		float puntos = Cuadricula.getCuadricula().calcularPuntos();
 		String st = idPartida + "," + nivel + "," + nombrePartida + "," + puntos;
+		Logger.getLogger().write("End Game " + idPartida + " [Level:" + nivel + "]: [Points:" + puntos + "]\n");
 		return st;
 	}
 
