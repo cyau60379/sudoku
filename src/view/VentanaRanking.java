@@ -22,7 +22,6 @@ import javax.swing.JButton;
 
 public class VentanaRanking extends JFrame implements Observer {
 
-	private static VentanaRanking ventanaRanking;
 	private JPanel rankingPanel;
 	private Controlador controlador;
 	private JComboBox<String> filtro;
@@ -31,18 +30,10 @@ public class VentanaRanking extends JFrame implements Observer {
 	private JTextArea textArea2;
 	private JButton btnFiltrar;
 
-	private VentanaRanking() {
+	public VentanaRanking() {
 		Juego.getJuego().addObserver(this);
 		inicializar();
 		update(null, null);
-	}
-
-	public static VentanaRanking getVentanaRanking() {
-		if (ventanaRanking == null) {
-			ventanaRanking = new VentanaRanking();
-		}
-		ventanaRanking.setVisible(true);
-		return ventanaRanking;
 	}
 
 	private void inicializar() {

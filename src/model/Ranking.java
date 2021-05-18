@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,14 +15,18 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import model.Cuadricula.Cuadricula;
+
 public class Ranking {
 	private static Ranking ranking;
-	private File fichero = new File("Ranking.txt");
-	private List<Map<String, String>> mapList = new ArrayList<Map<String, String>>();
+	private String path;
+	private File fichero;
+	private List<Map<String, String>> mapList;
 
 	private Ranking() {
+		path = Paths.get("src", "resources", "ranking.txt").toString();
+		fichero = new File(path);
 		crearFichero();
-		escritorDeFichero();
 		lectorDeFichero();
 		ordenarRanking(0);
 	}
@@ -45,8 +50,9 @@ public class Ranking {
 	}
 
 	private void lectorDeFichero() {
+		mapList = new ArrayList<Map<String, String>>();
 		try {
-			FileReader file = new FileReader("Ranking.txt");
+			FileReader file = new FileReader(path);
 			Scanner sc = new Scanner(file);
 			List<String> atributos = Arrays.asList("idPartida", "nivel", "nombre", "puntos");
 			while (sc.hasNext()) {
@@ -59,16 +65,16 @@ public class Ranking {
 				mapList.add(map);
 			}
 			file.close();
-
+			sc.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
 	}
 
-	private void escritorDeFichero() {
+	private void escritorDeFichero(String pMessage) {
 		try {
-			FileWriter file = new FileWriter("Ranking.txt", true);
-			file.write(cargarDatosRanking() + "\n");
+			FileWriter file = new FileWriter(path, true);
+			file.write(pMessage);
 			file.close();
 
 		} catch (IOException e) {
@@ -77,7 +83,13 @@ public class Ranking {
 	}
 
 	private String cargarDatosRanking() {
-		return Juego.getJuego().cargarDatosRanking();
+		String idPartida = Cuadricula.getCuadricula().getIdPartida();
+		int nivel = Cuadricula.getCuadricula().getNivel().getValor();
+		String nombrePartida = Cuadricula.getCuadricula().getNombrePartida();
+		float puntos = Cuadricula.getCuadricula().calcularPuntos();
+		String st = idPartida + "," + nivel + "," + nombrePartida + "," + puntos;
+		Logger.getLogger().write("End Game " + idPartida + " [Level:" + nivel + "]: [Points:" + puntos + "]\n");
+		return st;
 	}
 
 	public List<Map<String, String>> ordenarRanking(int pNivel) {
@@ -91,5 +103,10 @@ public class Ranking {
 		listaRanking.sort(Comparator.comparing(m -> Float.valueOf(m.get("puntos"))));
 		Collections.reverse(listaRanking);
 		return listaRanking;
+	}
+	
+	public void saveRanking() {
+		escritorDeFichero(cargarDatosRanking() + "\n");
+		lectorDeFichero(); // Update mapList
 	}
 }

@@ -337,7 +337,7 @@ public class Ventana extends JFrame implements Observer {
 						String mensaje = Juego.getJuego().getMensaje();
 						getInfo().setText(mensaje);
 						if (Juego.getJuego().isFinished()) {
-							VentanaRanking.getVentanaRanking();
+							new VentanaRanking().setVisible(true);
 						}
 					} catch (NullPointerException e2) {
 					}
@@ -361,7 +361,7 @@ public class Ventana extends JFrame implements Observer {
 						String mensaje = Juego.getJuego().getMensaje();
 						getInfo().setText(mensaje);
 						if (Juego.getJuego().isFinished()) {
-							VentanaRanking.getVentanaRanking();
+							new VentanaRanking().setVisible(true);
 						}
 					} catch (NullPointerException e2) {
 						e2.printStackTrace();
@@ -386,14 +386,14 @@ public class Ventana extends JFrame implements Observer {
 						if (Juego.getJuego().isFinished()) {
 							String mensaje = Juego.getJuego().getMensaje();
 							getInfo().setText(mensaje);
-							VentanaRanking.getVentanaRanking();
+							new VentanaRanking().setVisible(true);
 						}
 					} catch (NullPointerException e2) {
 					}
 					break;
 				case "Ranking":
 					try {
-						VentanaRanking.getVentanaRanking();
+						new VentanaRanking().setVisible(true);
 					} catch (NullPointerException e2) {
 					}
 				default:

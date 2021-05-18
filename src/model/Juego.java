@@ -98,6 +98,8 @@ public class Juego extends Observable {
 		if (!isFinished()) {
 			setChanged();
 			notifyObservers();
+		} else {
+			saveRanking();
 		}
 	}
 
@@ -118,6 +120,9 @@ public class Juego extends Observable {
 		setChanged();
 		notifyObservers();
 		Cuadricula.getCuadricula().finish();
+		if (isFinished()) {
+			saveRanking();
+		}
 		return message;
 	}
 
@@ -125,15 +130,8 @@ public class Juego extends Observable {
 		return Ranking.getRanking().ordenarRanking(pNivel);
 	}
 
-	public String cargarDatosRanking() {
-		// TODO Auto-generated method stub
-		String idPartida = Cuadricula.getCuadricula().getIdPartida();
-		int nivel = Cuadricula.getCuadricula().getNivel().getValor();
-		String nombrePartida = Cuadricula.getCuadricula().getNombrePartida();
-		float puntos = Cuadricula.getCuadricula().calcularPuntos();
-		String st = idPartida + "," + nivel + "," + nombrePartida + "," + puntos;
-		Logger.getLogger().write("End Game " + idPartida + " [Level:" + nivel + "]: [Points:" + puntos + "]\n");
-		return st;
+	public void saveRanking() {
+		Ranking.getRanking().saveRanking();
 	}
 
 	public boolean isFinished() {
