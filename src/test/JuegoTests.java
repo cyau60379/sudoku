@@ -60,7 +60,6 @@ class JuegoTests {
 		assertEquals("The file is untraceable.", outputStreamCaptor.toString().trim());
 	}
 
-
 	@Test
 	void fileFound() {
 		Juego.getJuego().init("src/resources/sudokus.txt");
@@ -90,7 +89,7 @@ class JuegoTests {
 	}
 	
 	@Test
-	void FinishGame_ShouldStoreRanking() {
+	void finishGame_ShouldStoreRanking() {
 		Integer sudokuTestUnique[] = new Integer[] {
 				9, 4, 1, 5, 8, 2, 3, 7, 6,
 				8, 7, 3, 4, 9, 6, 5, 2, 1,
