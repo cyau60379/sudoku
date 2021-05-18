@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import model.Nivel;
+import model.Ayuda.Ayuda;
 import model.Cuadricula.Cuadricula;
 
 class CuadriculaTests {
@@ -225,5 +226,32 @@ class CuadriculaTests {
 		Set<Integer> set = new HashSet<>();
 		set.add(1);
 		assertFalse(Cuadricula.getCuadricula().updateCandidatos(999, set));
+	}
+	
+	@Test
+	void CalculatePoints_ShouldReturnTheTrueResult() {
+		Ayuda.getAyuda().init();
+		Integer sudokuTestUnique[] = new Integer[] {
+				0, 4, 1, 5, 8, 2, 3, 7, 6,
+				8, 7, 3, 4, 9, 6, 5, 2, 1,
+				6, 2, 5, 1, 7, 3, 9, 8, 4,
+				3, 9, 4, 8, 6, 7, 1, 5, 2,
+				1, 5, 2, 3, 4, 9, 7, 6, 8,
+				7, 8, 6, 2, 5, 1, 4, 3, 9,
+				2, 3, 7, 9, 1, 8, 6, 4, 5,
+				5, 1, 8, 6, 3, 4, 2, 9, 7,
+				4, 6, 9, 7, 2, 5, 8, 1, 3,
+				};
+		List<Integer> myNumbers = Arrays.asList(sudokuTestUnique);
+		Cuadricula.getCuadricula().init();
+		Cuadricula.getCuadricula().begin("", Nivel.FACIL, myNumbers);
+		try {
+			Thread.sleep(3000); // Sleep 3 seconds
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Cuadricula.getCuadricula().updateCasilla(0, 9);
+		Cuadricula.getCuadricula().comprobarSolucion();
+		assertTrue(Cuadricula.getCuadricula().calcularPuntos() == 10000.0);
 	}
 }

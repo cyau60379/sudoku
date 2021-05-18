@@ -1,3 +1,3 @@
-S001,1,Pablo,3987.0
-S003,2,Abderraouf,3300.0
-S004,3,Cyril,5473.0
+S001,1,Pablo,37.0
+S003,2,Abderraouf,30.0
+S004,3,Cyril,150.0

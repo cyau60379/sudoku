@@ -61,7 +61,7 @@ public class Cuadricula {
 	}
 
 	public float calcularPuntos() {
-		float puntos = (30000 * nivel.getValor() / ((endTime - startTime) / 1000) + (30 * Ayuda.getAyuda().getContador()));
+		float puntos = 30000 * nivel.getValor() / ((endTime - startTime) / 1000 + (30 * Ayuda.getAyuda().getContador()));
 		return puntos;
 	}
 
