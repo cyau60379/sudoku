@@ -340,12 +340,18 @@ public class Ventana extends JFrame implements Observer {
 							new VentanaRanking().setVisible(true);
 						}
 					} catch (NullPointerException e2) {
+						if (!Juego.getJuego().isFinished()) {
+							getInfo().setText("Selectiona una casilla antes de utilizar ese boton");
+						}
 					}
 					break;
 				case "CalCandidatos":
 					try {
 						Juego.getJuego().autoUpdateCandidatos(currentCasilla.getId());
 					} catch (NullPointerException e2) {
+						if (!Juego.getJuego().isFinished()) {
+							getInfo().setText("Selectiona una casilla antes de utilizar ese boton");
+						}
 					}
 					break;
 				case "Restablecer":
@@ -353,6 +359,9 @@ public class Ventana extends JFrame implements Observer {
 						Juego.getJuego().updateCasilla(currentCasilla.getId(), 0);
 						Juego.getJuego().updateCandidatos(currentCasilla.getId(), new HashSet<>());
 					} catch (NullPointerException e2) {
+						if (!Juego.getJuego().isFinished()) {
+							getInfo().setText("Selectiona una casilla antes de utilizar ese boton");
+						}
 					}
 					break;
 				case "Comprobar":
@@ -361,6 +370,7 @@ public class Ventana extends JFrame implements Observer {
 						String mensaje = Juego.getJuego().getMensaje();
 						getInfo().setText(mensaje);
 						if (Juego.getJuego().isFinished()) {
+							b.setEnabled(false);
 							new VentanaRanking().setVisible(true);
 						}
 					} catch (NullPointerException e2) {
@@ -377,7 +387,14 @@ public class Ventana extends JFrame implements Observer {
 						}
 						Juego.getJuego().updateCandidatos(currentCasilla.getId(), listaCandidatos);
 
-					} catch (NumberFormatException | NullPointerException e2) {
+					} catch (NumberFormatException e2) {
+						if (!Juego.getJuego().isFinished()) {
+							getInfo().setText("Error con los candidatos: Debe utilizar la forma '1,2,3'");
+						}
+					} catch (NullPointerException e3) {
+						if (!Juego.getJuego().isFinished()) {
+							getInfo().setText("Selectiona una casilla antes de utilizar ese boton");
+						}
 					}
 					break;
 				case "Ayuda":
@@ -386,9 +403,11 @@ public class Ventana extends JFrame implements Observer {
 						if (Juego.getJuego().isFinished()) {
 							String mensaje = Juego.getJuego().getMensaje();
 							getInfo().setText(mensaje);
+							btnComprobar.setEnabled(false);
 							new VentanaRanking().setVisible(true);
 						}
 					} catch (NullPointerException e2) {
+						
 					}
 					break;
 				case "Ranking":

@@ -143,16 +143,19 @@ public class VentanaRanking extends JFrame implements Observer {
 		}
 		
 		List<Map<String, String>> list = Juego.getJuego().getRanking(pNivel);
-		String text = "";
-		int j = 0;
-		for (int i = 0; i < list.size(); i++) {
-			if (j < 10) {
-				text += list.get(i).toString() + "\n";
-				j++;
+		if (list == null) {
+			textArea2.setText("File Error: the ranking.txt file contains an error, please verify it");
+		} else {
+			String text = "";
+			int j = 0;
+			for (int i = 0; i < list.size(); i++) {
+				if (j < 10) {
+					text += list.get(i).toString() + "\n";
+					j++;
+				}
 			}
+			textArea2.setText(text);
 		}
-		textArea2.setText(text);
-
 	}
 
 	private class Controlador implements ActionListener {

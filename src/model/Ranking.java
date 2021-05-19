@@ -93,18 +93,23 @@ public class Ranking {
 	}
 
 	public List<Map<String, String>> ordenarRanking(int pNivel) {
-		if (pNivel == 0) {
-			mapList.sort(Comparator.comparing(m -> Float.valueOf(m.get("puntos"))));
-			Collections.reverse(mapList);
-			return mapList;
+		try {
+			if (pNivel == 0) {
+				mapList.sort(Comparator.comparing(m -> Float.valueOf(m.get("puntos"))));
+				Collections.reverse(mapList);
+				return mapList;
+			}
+			List<Map<String, String>> listaRanking = mapList.stream()
+					.filter(p -> Integer.parseInt(p.get("nivel")) == pNivel).collect(Collectors.toList());
+			listaRanking.sort(Comparator.comparing(m -> Float.valueOf(m.get("puntos"))));
+			Collections.reverse(listaRanking);
+			return listaRanking;
+		} catch (NumberFormatException e) {
+			System.out.println("Error in the ranking file. Please verify that it is not broken");
+			return null;
 		}
-		List<Map<String, String>> listaRanking = mapList.stream()
-				.filter(p -> Integer.parseInt(p.get("nivel")) == pNivel).collect(Collectors.toList());
-		listaRanking.sort(Comparator.comparing(m -> Float.valueOf(m.get("puntos"))));
-		Collections.reverse(listaRanking);
-		return listaRanking;
 	}
-	
+
 	public void saveRanking() {
 		escritorDeFichero(cargarDatosRanking() + "\n");
 		lectorDeFichero(); // Update mapList
