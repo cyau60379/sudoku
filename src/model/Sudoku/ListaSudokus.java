@@ -76,20 +76,6 @@ public class ListaSudokus {
 		}
 	}
 
-	/**
-	 * 
-	 * @param pId
-	 */
-	private Sudoku getSudoku(String pId) {
-		// TODO - implement ListaPartida.getSudoku
-		throw new UnsupportedOperationException();
-	}
-
-	public boolean comprobarSolucion() {
-		// TODO - implement ListaPartida.comprobarSolucion
-		throw new UnsupportedOperationException();
-	}
-
 	private List<Integer> convertStringToList(String pString) {
 		List<Integer> l = new ArrayList<>();
 		String[] sTab = pString.split("");
