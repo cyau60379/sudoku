@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.Juego;
-import model.Nivel;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;

@@ -9,7 +9,7 @@ import model.Nivel;
 public interface EstadoCuadricula {
 	public void init();
 
-	public void begin(String pId,Nivel nivel ,List<Integer> pSudoku);
+	public void begin(String pId, Nivel nivel, List<Integer> pSudoku);
 
 	public List<Integer> updateCasilla(int pCasilla, int pValor);
 

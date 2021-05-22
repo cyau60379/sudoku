@@ -15,7 +15,7 @@ public class EstadoInitial implements EstadoCuadricula {
 	}
 
 	@Override
-	public void begin(String pId,Nivel nivel ,List<Integer> pSudoku) {
+	public void begin(String pId, Nivel nivel, List<Integer> pSudoku) {
 		Cuadricula.getCuadricula().setIdPartida(pId);
 		List<Casilla> listaCasillas = new ArrayList<>();
 		if (pSudoku.size() != 81) {
@@ -33,7 +33,7 @@ public class EstadoInitial implements EstadoCuadricula {
 		Cuadricula.getCuadricula().setNivel(nivel);
 		Cuadricula.getCuadricula().setListaCasillas(listaCasillas);
 		Cuadricula.getCuadricula().calcularTodosLosCandidatos();
-		long startTime=System.currentTimeMillis();
+		long startTime = System.currentTimeMillis();
 		Cuadricula.getCuadricula().setTiempoInicio(startTime);
 		Cuadricula.getCuadricula().setEstado(new Ongoing());
 	}
@@ -126,7 +126,7 @@ public class EstadoInitial implements EstadoCuadricula {
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

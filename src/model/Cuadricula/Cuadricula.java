@@ -202,7 +202,6 @@ public class Cuadricula {
 	}
 
 	public Nivel getNivel() {
-		// TODO Auto-generated method stub
 		return nivel;
 	}
 	public String getIdPartida() {
@@ -210,7 +209,6 @@ public class Cuadricula {
 	}
 
 	public String getNombrePartida() {
-		// TODO Auto-generated method stub
 		return nombrePartida;
 	}
 	

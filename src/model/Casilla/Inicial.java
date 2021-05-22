@@ -3,7 +3,7 @@ package model.Casilla;
 public class Inicial implements EstadoCasilla {
 
 	private ICasillaEstado casilla;
-	
+
 	public Inicial(ICasillaEstado pCasilla) {
 		casilla = pCasilla;
 	}
@@ -18,7 +18,8 @@ public class Inicial implements EstadoCasilla {
 	}
 
 	@Override
-	public void reinicializarProcesado() {}
+	public void reinicializarProcesado() {
+	}
 
 	@Override
 	public boolean tieneError() {

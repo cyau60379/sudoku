@@ -78,12 +78,6 @@ public class Ventana extends JFrame implements Observer {
 		if (editor == null) {
 			editor = new JPanel();
 
-			JButton btnCalcularCandidatos = new JButton("CalCandidatos");
-			btnCalcularCandidatos.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
-
 			GroupLayout gl_panel = new GroupLayout(editor);
 			gl_panel.setHorizontalGroup(
 				gl_panel.createParallelGroup(Alignment.LEADING)

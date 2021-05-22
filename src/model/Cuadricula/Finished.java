@@ -7,14 +7,14 @@ import java.util.Set;
 import model.Nivel;
 
 public class Finished implements EstadoCuadricula {
-	
+
 	@Override
 	public void init() {
 		Cuadricula.getCuadricula().setEstado(new EstadoInitial());
 	}
 
 	@Override
-	public void begin(String pId, Nivel nivel,List<Integer> pSudoku) {
+	public void begin(String pId, Nivel nivel, List<Integer> pSudoku) {
 	}
 
 	@Override
@@ -104,8 +104,7 @@ public class Finished implements EstadoCuadricula {
 
 	@Override
 	public void finish() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }

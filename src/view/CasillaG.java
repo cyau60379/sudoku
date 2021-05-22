@@ -3,7 +3,6 @@ package view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
